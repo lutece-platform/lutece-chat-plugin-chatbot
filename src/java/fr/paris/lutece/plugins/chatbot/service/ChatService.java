@@ -60,8 +60,11 @@ public class ChatService
         }
         data.addUserPost( strMessage );
         ChatBot bot = BotService.getBot( strBotKey );
-        String strBotMessage = bot.processUserMessage( strMessage, strConversationId, locale );
-        data.addBotPost( strBotMessage );
+        List<String> listMessages = bot.processUserMessage( strMessage, strConversationId, locale );
+        for( String strBotMessage : listMessages )
+        {
+            data.addBotPost( strBotMessage );
+        }
 
     }
 

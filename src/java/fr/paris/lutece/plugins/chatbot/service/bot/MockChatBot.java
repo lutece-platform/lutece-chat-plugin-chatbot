@@ -34,6 +34,8 @@
 
 package fr.paris.lutece.plugins.chatbot.service.bot;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -43,9 +45,11 @@ public class MockChatBot extends AbstractChatBot implements ChatBot
 {
 
     @Override
-    public String processUserMessage( String strMessage, String strConversationId, Locale locale )
+    public List<String> processUserMessage( String strMessage, String strConversationId, Locale locale )
     {
-        return "Hello !";
+        List<String> listMessages = new ArrayList<>();
+        listMessages.add( "Hello !" );
+        return listMessages;
     }
 
 }

@@ -48,7 +48,7 @@ public interface ChatBot
 
     String getDescription( Locale locale );
 
-    String processUserMessage( String strMessage, String strConversationId, Locale locale );
+    List<String> processUserMessage( String strMessage, String strConversationId, Locale locale );
 
     List<String> getAvailableLanguages( );
 
