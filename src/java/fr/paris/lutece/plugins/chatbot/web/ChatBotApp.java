@@ -34,7 +34,7 @@
 package fr.paris.lutece.plugins.chatbot.web;
 
 import fr.paris.lutece.plugins.chatbot.business.BotDescription;
-import fr.paris.lutece.plugins.chatbot.business.ChatBot;
+import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.plugins.chatbot.business.Post;
 import fr.paris.lutece.plugins.chatbot.service.BotService;
 import static fr.paris.lutece.plugins.chatbot.service.BotService.getBots;

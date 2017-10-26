@@ -33,7 +33,7 @@
  */
 package fr.paris.lutece.plugins.chatbot.service;
 
-import fr.paris.lutece.plugins.chatbot.business.ChatBot;
+import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 
 import java.util.List;

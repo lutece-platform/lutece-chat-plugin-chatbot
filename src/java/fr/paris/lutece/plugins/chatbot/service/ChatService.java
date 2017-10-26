@@ -34,7 +34,7 @@
 
 package fr.paris.lutece.plugins.chatbot.service;
 
-import fr.paris.lutece.plugins.chatbot.business.ChatBot;
+import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.plugins.chatbot.business.ChatData;
 import fr.paris.lutece.plugins.chatbot.business.Post;
 import java.util.HashMap;

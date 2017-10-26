@@ -4,7 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
 
-    <bean id="chatbot.mockChatBot" class="fr.paris.lutece.plugins.chatbot.business.MockChatBot">
+    <bean id="chatbot.mockChatBot" class="fr.paris.lutece.plugins.chatbot.service.bot.MockChatBot">
         <property name="key" value="test"/>
         <property name="name" value="test"/>
         <property name="description" value="test"/>

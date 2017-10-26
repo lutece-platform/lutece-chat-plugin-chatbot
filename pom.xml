@@ -52,6 +52,6 @@
         <connection>scm:git:https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</url>
-  </scm>
+    </scm>
  
 </project>

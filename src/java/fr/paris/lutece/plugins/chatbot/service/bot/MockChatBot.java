@@ -32,9 +32,8 @@
  * License 1.0
  */
 
-package fr.paris.lutece.plugins.chatbot.business;
+package fr.paris.lutece.plugins.chatbot.service.bot;
 
-import java.util.List;
 import java.util.Locale;
 
 /**

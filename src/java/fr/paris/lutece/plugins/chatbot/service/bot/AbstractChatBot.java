@@ -31,8 +31,9 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.chatbot.business;
+package fr.paris.lutece.plugins.chatbot.service.bot;
 
+import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.portal.service.i18n.I18nService;
 
 import java.io.Serializable;
