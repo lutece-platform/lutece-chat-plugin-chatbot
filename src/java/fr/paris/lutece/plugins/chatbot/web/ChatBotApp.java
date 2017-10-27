@@ -60,7 +60,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * This class provides a simple implementation of an XPage
  */
-@Controller( xpageName = "bot", pageTitleI18nKey = "chatbot.xpage.bot.pageTitle", pagePathI18nKey = "chatbot.xpage.bot.pagePathLabel" )
+@Controller( xpageName = "chatbot", pageTitleI18nKey = "chatbot.xpage.bot.pageTitle", pagePathI18nKey = "chatbot.xpage.bot.pagePathLabel" )
 public class ChatBotApp extends MVCApplication
 {
     private static final String TEMPLATE_BOT = "/skin/plugins/chatbot/bot.html";
