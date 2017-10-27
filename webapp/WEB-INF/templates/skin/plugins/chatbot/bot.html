@@ -24,20 +24,20 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <form class="form" action="jsp/site/Portal.jsp" method="post" >
-            <input type="hidden" name="page" value="bot" />
+            <input type="hidden" name="page" value="chatbot" />
             <input type="hidden" name="action" value="response" />
-			<div class="input-group">
-				<input id="input" type="text" name="response" class="form-control input-sm">
-				<span class="input-group-btn">
-				<button class="btn btn-default btn-sm" type="submit" >
-					<i class="fa fa-comment"></i>
-					Envoyer
-				</button>
-				</span>
-			</div>
+            <div class="input-group">
+                <input id="input" type="text" name="response" class="form-control input-sm">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="submit" >
+                        <i class="fa fa-comment"></i>
+                        #i18n{chatbot.bot.buttonSend}
+                    </button>
+                </span>
+            </div>
         </form>
     </div>
-<!--    
+    <!--    
     <div class="col-md-3 pull-left hidden-xs">
         <img class="img-responsive" src="images/skin/plugins/chatbot/bot-side.jpg" alt="bot picture" />
     </div>

@@ -29,7 +29,7 @@
     <!-- XPages parameters -->
     <applications>
         <application>
-            <application-id>bot</application-id>
+            <application-id>chatbot</application-id>
             <application-class>fr.paris.lutece.plugins.chatbot.web.ChatBotApp</application-class>
         </application>
     </applications>

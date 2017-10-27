@@ -75,7 +75,7 @@ public class ChatBotApp extends MVCApplication
     private static final String VIEW_BOT = "bot";
     private static final String ACTION_RESPONSE = "response";
     private static final String RESET = "reset";
-    private static final String URL_BOT = "jsp/site/Portal.jsp?page=bot&view=bot";
+    private static final String URL_BOT = "jsp/site/Portal.jsp?page=chatbot&view=bot";
     private static final long serialVersionUID = 1L;
 
     private String _strBotKey;
