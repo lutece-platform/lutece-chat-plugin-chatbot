@@ -42,15 +42,44 @@ import java.util.Locale;
  */
 public interface ChatBot
 {
+    /**
+     * Get the bot ID
+     * @return The ID
+     */
     String getKey( );
 
+    /**
+     * Gets the bot name
+     * @param locale The locale
+     * @return The name
+     */
     String getName( Locale locale );
 
+    /**
+     * Gets the bot description
+     * @param locale The locale
+     * @return The description
+     */
     String getDescription( Locale locale );
 
+    /**
+     * Process the user message
+     * @param strMessage The user message
+     * @param strConversationId The conversation ID
+     * @param locale The locale
+     * @return The list of bot responses
+     */
     List<String> processUserMessage( String strMessage, String strConversationId, Locale locale );
 
+    /**
+     * Returns available languages
+     * @return available languages
+     */
     List<String> getAvailableLanguages( );
 
+    /**
+     * The image URL of the bot's avatar 
+     * @return The URL
+     */
     String getAvatarUrl( );
 }

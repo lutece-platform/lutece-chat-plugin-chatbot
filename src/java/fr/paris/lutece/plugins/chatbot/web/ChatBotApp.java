@@ -39,8 +39,6 @@ import fr.paris.lutece.plugins.chatbot.business.Post;
 import fr.paris.lutece.plugins.chatbot.service.BotService;
 import static fr.paris.lutece.plugins.chatbot.service.BotService.getBots;
 import fr.paris.lutece.plugins.chatbot.service.ChatService;
-import fr.paris.lutece.portal.service.security.LuteceUser;
-import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
@@ -80,7 +78,7 @@ public class ChatBotApp extends MVCApplication
 
     private String _strBotKey;
     private Locale _locale;
-    private String _strUserId;
+    private String _strConversationId;
     private ChatBot _bot;
 
     /**
@@ -112,13 +110,13 @@ public class ChatBotApp extends MVCApplication
     public XPage viewBot( HttpServletRequest request )
     {
         _locale = getBotLocale( request );
-        _strUserId = getUserId( request );
+        _strConversationId = getConversationId();
         if ( _strBotKey == null )
         {
             _strBotKey = request.getParameter( PARAMETER_BOT );
             _bot = BotService.getBot( _strBotKey );
         }
-        List<Post> listPosts = ChatService.getConversation( _strUserId );
+        List<Post> listPosts = ChatService.getConversation( _strConversationId );
         Map<String, Object> model = getModel( );
         model.put( MARK_POSTS_LIST, listPosts );
         model.put( MARK_BOT_AVATAR, _bot.getAvatarUrl( ) );
@@ -142,7 +140,7 @@ public class ChatBotApp extends MVCApplication
     {
         String strMessage = request.getParameter( PARAMETER_RESPONSE );
 
-        ChatService.processMessage( request, _strUserId, strMessage, _strBotKey, _locale );
+        ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
 
         return redirectView( request, VIEW_BOT );
     }
@@ -210,23 +208,12 @@ public class ChatBotApp extends MVCApplication
 
         return list;
     }
-
-    private String getUserId( HttpServletRequest request )
+    /**
+     * Generate a Conversation ID
+     * @return  The ID
+     */
+    private String getConversationId()
     {
-        if ( _strUserId == null )
-        {
-            if ( SecurityService.isAuthenticationEnable( ) )
-            {
-                LuteceUser user = SecurityService.getInstance( ).getRegisteredUser( request );
-                _strUserId = user.getName( );
-            }
-            else
-            {
-                _strUserId = UUID.randomUUID( ).toString( );
-            }
-        }
-
-        return _strUserId;
-
+        return UUID.randomUUID( ).toString( );
     }
 }
