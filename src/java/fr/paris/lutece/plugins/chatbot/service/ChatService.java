@@ -48,26 +48,49 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ChatService
 {
+    private static final String RESET = "reset";
+    
     private static Map<String, ChatData> _mapConversations = new HashMap<>( );
 
+    /**
+     * Process message
+     * @param request The request
+     * @param strConversationId The conversation ID
+     * @param strMessage The message
+     * @param strBotKey The bot Key
+     * @param locale The locale
+     */
     public static void processMessage( HttpServletRequest request, String strConversationId, String strMessage, String strBotKey, Locale locale )
     {
+        boolean bResetConversation = RESET.equals( strMessage );
+        if( bResetConversation )
+        {
+            _mapConversations.remove( strConversationId );
+        }
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
             data = createNewConversation( strBotKey );
             _mapConversations.put( strConversationId, data );
         }
-        data.addUserPost( strMessage );
-        ChatBot bot = BotService.getBot( strBotKey );
-        List<String> listMessages = bot.processUserMessage( strMessage, strConversationId, locale );
-        for( String strBotMessage : listMessages )
-        {
-            data.addBotPost( strBotMessage );
+        if (! bResetConversation )
+        {    
+            data.addUserPost( strMessage );
+            ChatBot bot = BotService.getBot( strBotKey );
+            List<String> listMessages = bot.processUserMessage( strMessage, strConversationId, locale );
+            for( String strBotMessage : listMessages )
+            {
+                data.addBotPost( strBotMessage );
+            }
         }
 
     }
 
+    /**
+     * Get conversation
+     * @param strConversationId Conversation Id
+     * @return The list of post
+     */
     public static List<Post> getConversation( String strConversationId )
     {
         ChatData data = _mapConversations.get( strConversationId );
@@ -78,6 +101,11 @@ public class ChatService
         return data.getPosts( );
     }
 
+    /**
+     * Create a new conversation
+     * @param strBotKey The bot key
+     * @return Chat data
+     */
     private static ChatData createNewConversation( String strBotKey )
     {
         ChatData data = new ChatData( strBotKey );
