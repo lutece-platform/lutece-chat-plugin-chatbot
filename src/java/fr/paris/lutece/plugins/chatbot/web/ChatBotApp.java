@@ -214,6 +214,10 @@ public class ChatBotApp extends MVCApplication
      */
     private String getConversationId()
     {
-        return UUID.randomUUID( ).toString( );
+        if( _strConversationId == null )
+        {
+            _strConversationId = UUID.randomUUID( ).toString( );
+        }
+        return _strConversationId;
     }
 }
