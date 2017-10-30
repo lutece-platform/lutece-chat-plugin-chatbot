@@ -39,6 +39,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -258,9 +259,9 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
         StringBuilder sbLastMessage = new StringBuilder( strLastMessage );
         sbLastMessage.append( "<ul>" );
 
-        for ( String strKey : mapData.keySet( ) )
+        for ( Entry entry : mapData.entrySet() )
         {
-            sbLastMessage.append( "<li>" ).append( strKey ).append( " : " ).append( mapData.get( strKey ) ).append( "</li>" );
+            sbLastMessage.append( "<li>" ).append( entry.getKey() ).append( " : " ).append( entry.getValue() ).append( "</li>" );
         }
 
         sbLastMessage.append( "</ul>" );

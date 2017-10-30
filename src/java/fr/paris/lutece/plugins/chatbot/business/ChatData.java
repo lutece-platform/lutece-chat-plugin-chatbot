@@ -34,7 +34,6 @@
 
 package fr.paris.lutece.plugins.chatbot.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

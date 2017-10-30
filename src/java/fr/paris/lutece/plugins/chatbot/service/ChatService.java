@@ -114,8 +114,7 @@ public final class ChatService
         {
             data = new ChatData( );
         }
-        List<Post> listPosts = _renderer.render( data.getPosts( ) );
-        return listPosts;
+        return _renderer.render( data.getPosts( ) );
     }
 
 }
