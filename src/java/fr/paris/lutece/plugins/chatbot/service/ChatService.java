@@ -37,6 +37,7 @@ package fr.paris.lutece.plugins.chatbot.service;
 import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.plugins.chatbot.business.ChatData;
 import fr.paris.lutece.plugins.chatbot.business.Post;
+import fr.paris.lutece.portal.service.spring.SpringContextService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +52,7 @@ public class ChatService
     private static final String RESET = "reset";
     
     private static Map<String, ChatData> _mapConversations = new HashMap<>( );
+    private static PostRenderer _renderer = SpringContextService.getBean( "chatbot.postRenderer" );
 
     /**
      * Process message
@@ -98,7 +100,8 @@ public class ChatService
         {
             data = new ChatData( strConversationId );
         }
-        return data.getPosts( );
+        List<Post> listPosts = _renderer.render( data.getPosts( ) );
+        return listPosts;
     }
 
     /**
@@ -111,4 +114,5 @@ public class ChatService
         ChatData data = new ChatData( strBotKey );
         return data;
     }
+    
 }
