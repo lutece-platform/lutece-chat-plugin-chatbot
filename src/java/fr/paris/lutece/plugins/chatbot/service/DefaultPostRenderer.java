@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.chatbot.service;
 
 import fr.paris.lutece.plugins.chatbot.business.Post;
@@ -47,39 +46,38 @@ import java.util.regex.Pattern;
 public class DefaultPostRenderer implements PostRenderer
 {
     // Pattern for recognizing a URL, based off RFC 3986
-    private static final Pattern PATTERN_URL = Pattern.compile(
-        "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
-                + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
-                + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
-        Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);    
-    
-    
+    private static final Pattern PATTERN_URL = Pattern.compile( "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)" + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
+            + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL );
+
     /**
      * {@inheritDoc }
+     * 
      * @param listPosts
-     * @return 
+     * @return
      */
     @Override
     public List<Post> render( List<Post> listPosts )
     {
-        List<Post> list = new ArrayList<>();
-        for( Post post : listPosts )
+        List<Post> list = new ArrayList<>( );
+        for ( Post post : listPosts )
         {
-            list.add( renderPost( post ));
+            list.add( renderPost( post ) );
         }
         return list;
     }
 
     /**
-     * Render a post 
-     * @param post The post
-     * @return 
+     * Render a post
+     * 
+     * @param post
+     *            The post
+     * @return
      */
     private Post renderPost( Post post )
     {
-        Post rendered = new Post();
-        rendered.setAuthor( post.getAuthor() );
-        String strContent = post.getContent();
+        Post rendered = new Post( );
+        rendered.setAuthor( post.getAuthor( ) );
+        String strContent = post.getContent( );
         strContent = renderUrl( strContent );
         rendered.setContent( strContent );
         return rendered;
@@ -87,21 +85,21 @@ public class DefaultPostRenderer implements PostRenderer
 
     private String renderUrl( String strContent )
     {
-        StringBuilder sbRendered = new StringBuilder();
+        StringBuilder sbRendered = new StringBuilder( );
         Matcher matcher = PATTERN_URL.matcher( strContent );
         int nPos = 0;
-        while ( matcher.find()) 
+        while ( matcher.find( ) )
         {
-            int nMatchStart = matcher.start(1);
-            int nMatchEnd = matcher.end();
-            String strUrl = strContent.substring( nMatchStart , nMatchEnd );
-            sbRendered.append( strContent.substring( nPos , nMatchStart ));
-            sbRendered.append( "<a href=\"").append( strUrl ).append( "\">").append( strUrl ).append( "</a>");
+            int nMatchStart = matcher.start( 1 );
+            int nMatchEnd = matcher.end( );
+            String strUrl = strContent.substring( nMatchStart, nMatchEnd );
+            sbRendered.append( strContent.substring( nPos, nMatchStart ) );
+            sbRendered.append( "<a href=\"" ).append( strUrl ).append( "\">" ).append( strUrl ).append( "</a>" );
             nPos = nMatchEnd;
-        }    
+        }
         sbRendered.append( strContent.substring( nPos ) );
-        
-        return sbRendered.toString();
+
+        return sbRendered.toString( );
     }
-    
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2016, Mairie de Paris
+ * Copyright (c) 2002-2017, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.chatbot.service.bot;
 
-import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.portal.service.i18n.I18nService;
 
 import java.io.Serializable;

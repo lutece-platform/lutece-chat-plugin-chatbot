@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2016, Mairie de Paris
+ * Copyright (c) 2002-2017, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -72,7 +72,6 @@ public class ChatBotApp extends MVCApplication
     private static final String VIEW_LIST = "list";
     private static final String VIEW_BOT = "bot";
     private static final String ACTION_RESPONSE = "response";
-    private static final String RESET = "reset";
     private static final String URL_BOT = "jsp/site/Portal.jsp?page=chatbot&view=bot";
     private static final long serialVersionUID = 1L;
 
@@ -110,7 +109,7 @@ public class ChatBotApp extends MVCApplication
     public XPage viewBot( HttpServletRequest request )
     {
         _locale = getBotLocale( request );
-        _strConversationId = getConversationId();
+        _strConversationId = getConversationId( );
         if ( _strBotKey == null )
         {
             _strBotKey = request.getParameter( PARAMETER_BOT );
@@ -208,13 +207,15 @@ public class ChatBotApp extends MVCApplication
 
         return list;
     }
+
     /**
      * Generate a Conversation ID
-     * @return  The ID
+     * 
+     * @return The ID
      */
-    private String getConversationId()
+    private String getConversationId( )
     {
-        if( _strConversationId == null )
+        if ( _strConversationId == null )
         {
             _strConversationId = UUID.randomUUID( ).toString( );
         }

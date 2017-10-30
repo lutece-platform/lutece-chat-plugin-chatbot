@@ -46,26 +46,26 @@ import static org.junit.Assert.*;
  */
 public class DefaultPostRendererTest
 {
-    private static final String POST_CONTENT_URL  = "Welcome to http://lutece.paris.fr";
-    private static final String POST_RENDERED_CONTENT_URL  = "Welcome to <a href=\"http://lutece.paris.fr\">http://lutece.paris.fr</a>";
-    
+    private static final String POST_CONTENT_URL = "Welcome to http://lutece.paris.fr";
+    private static final String POST_RENDERED_CONTENT_URL = "Welcome to <a href=\"http://lutece.paris.fr\">http://lutece.paris.fr</a>";
+
     /**
      * Test of render method, of class DefaultPostRenderer.
      */
     @Test
-    public void testRender()
+    public void testRender( )
     {
-        
+
         System.out.println( "render" );
-        List<Post> listPosts = new ArrayList<>();
-        Post post = new Post();
+        List<Post> listPosts = new ArrayList<>( );
+        Post post = new Post( );
         post.setAuthor( Post.AUTHOR_BOT );
         post.setContent( POST_CONTENT_URL );
         listPosts.add( post );
-        DefaultPostRenderer instance = new DefaultPostRenderer();
+        DefaultPostRenderer instance = new DefaultPostRenderer( );
         List<Post> result = instance.render( listPosts );
-        System.out.println( "Rendered URL : " +  result.get( 0 ).getContent() );
-        assertEquals( result.get( 0 ).getContent() , POST_RENDERED_CONTENT_URL );
+        System.out.println( "Rendered URL : " + result.get( 0 ).getContent( ) );
+        assertEquals( result.get( 0 ).getContent( ), POST_RENDERED_CONTENT_URL );
     }
-    
+
 }

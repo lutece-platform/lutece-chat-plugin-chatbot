@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.chatbot.service;
 
 import fr.paris.lutece.plugins.chatbot.business.Post;
@@ -41,11 +40,13 @@ import java.util.List;
 /**
  * PostRenderer
  */
-public interface PostRenderer 
+public interface PostRenderer
 {
     /**
      * Render a list of post (Renders URL links, ...)
-     * @param lisPosts The list of posts
+     * 
+     * @param lisPosts
+     *            The list of posts
      * @return The rendered list of posts
      */
     List<Post> render( List<Post> lisPosts );

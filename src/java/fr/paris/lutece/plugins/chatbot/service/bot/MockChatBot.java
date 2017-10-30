@@ -47,7 +47,7 @@ public class MockChatBot extends AbstractChatBot implements ChatBot
     @Override
     public List<String> processUserMessage( String strMessage, String strConversationId, Locale locale )
     {
-        List<String> listMessages = new ArrayList<>();
+        List<String> listMessages = new ArrayList<>( );
         listMessages.add( "Hello !" );
         return listMessages;
     }

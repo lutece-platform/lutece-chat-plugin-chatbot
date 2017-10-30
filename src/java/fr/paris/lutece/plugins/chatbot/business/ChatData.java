@@ -44,11 +44,6 @@ public class ChatData
 {
     private List<Post> _listPosts;
 
-    public ChatData( String strConversationId )
-    {
-        _listPosts = new ArrayList<Post>( );
-    }
-
     /**
      * Add a post
      * 
