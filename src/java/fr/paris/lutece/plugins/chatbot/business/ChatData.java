@@ -34,6 +34,7 @@
 
 package fr.paris.lutece.plugins.chatbot.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,8 +42,8 @@ import java.util.List;
  */
 public class ChatData
 {
-    private List<Post> _listPosts;
-
+    private List<Post> _listPosts = new ArrayList<>();
+    
     /**
      * Add a post
      * 
