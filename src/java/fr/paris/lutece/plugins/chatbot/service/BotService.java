@@ -35,15 +35,20 @@ package fr.paris.lutece.plugins.chatbot.service;
 
 import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * BotService
  */
 public final class BotService
 {
-    private static List<ChatBot> _listBots;
+    private static Map< String ,ChatBot > _mapBots = new HashMap<>();
+    
+    private static boolean _bInitFromContextFiles;
 
     /** Private constructor */
     private BotService( )
@@ -57,12 +62,30 @@ public final class BotService
      */
     public static List<ChatBot> getBots( )
     {
-        if ( _listBots == null )
+        if ( ! _bInitFromContextFiles )
         {
-            _listBots = SpringContextService.getBeansOfType( ChatBot.class );
+            initFromContextFiles();
+            _bInitFromContextFiles = true;
         }
+        return new ArrayList<ChatBot>( _mapBots.values() );
+    }
 
-        return _listBots;
+    /**
+     * Register a bot from an other module
+     * @param chatbot The chatbot to register
+     */
+    public static void register( ChatBot chatbot )
+    {
+        _mapBots.put(  chatbot.getKey() , chatbot );
+    }
+
+    /**
+     * Unregister a bot 
+     * @param strChatBotKey The chatbot key
+     */
+    public static void unregister( String strChatBotKey )
+    {
+        _mapBots.remove( strChatBotKey );
     }
 
     /**
@@ -74,14 +97,17 @@ public final class BotService
      */
     public static ChatBot getBot( String strBotKey )
     {
-        for ( ChatBot bot : getBots( ) )
-        {
-            if ( bot.getKey( ).equals( strBotKey ) )
-            {
-                return bot;
-            }
-        }
+        return _mapBots.get( strBotKey );
+    }
 
-        return null;
+    /**
+     * Init chatbots list from chatbot defined in context files 
+     */
+    private static void initFromContextFiles()
+    {
+        for( ChatBot chatbot : SpringContextService.getBeansOfType( ChatBot.class ))
+        {
+            register( chatbot );
+        }
     }
 }
