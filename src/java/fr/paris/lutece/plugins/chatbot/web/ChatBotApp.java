@@ -108,13 +108,28 @@ public class ChatBotApp extends MVCApplication
     @View( VIEW_BOT )
     public XPage viewBot( HttpServletRequest request )
     {
-        _locale = getBotLocale( request );
-        _strConversationId = getConversationId( );
-        if ( _strBotKey == null )
+        String strBotKey = request.getParameter( PARAMETER_BOT );
+        if( strBotKey == null )
         {
-            _strBotKey = request.getParameter( PARAMETER_BOT );
-            _bot = BotService.getBot( _strBotKey );
+            // assuming the bot is the current session bot
+            if( _strBotKey == null )
+            {
+                // session is closed
+                return redirectView( request, VIEW_LIST );
+            }
         }
+        else
+        {
+            if( ! strBotKey.equals( _strBotKey ) )
+            {
+                // new bot or bot has changed
+                _strBotKey = strBotKey;
+                _bot = BotService.getBot( _strBotKey );
+                _locale = getBotLocale( request );
+                _strConversationId = getNewConversationId( );
+            }
+        }
+        
         List<Post> listPosts = ChatService.getConversation( _strConversationId );
         Map<String, Object> model = getModel( );
         model.put( MARK_POSTS_LIST, listPosts );
@@ -213,12 +228,8 @@ public class ChatBotApp extends MVCApplication
      * 
      * @return The ID
      */
-    private String getConversationId( )
+    private String getNewConversationId( )
     {
-        if ( _strConversationId == null )
-        {
-            _strConversationId = UUID.randomUUID( ).toString( );
-        }
-        return _strConversationId;
+        return UUID.randomUUID( ).toString( );
     }
 }

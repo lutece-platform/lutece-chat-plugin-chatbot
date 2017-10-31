@@ -201,7 +201,7 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     @Override
     public String getAvatarUrl( )
     {
-        if ( _strBotAvatarUrl == null )
+        if ( _strBotAvatarUrl == null || _strBotAvatarUrl.equals( "" ) )
         {
             _strBotAvatarUrl = URL_DEFAULT_BOT_AVATAR;
         }
