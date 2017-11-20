@@ -10,7 +10,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>plugin-chatbot</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>Lutece chatbot plugin</name>
 
     <repositories>
@@ -43,15 +43,16 @@
     </dependencies>
 
     <properties>
-        <componentName></componentName>
+        <componentName />
         <jiraProjectName>CHATBOT</jiraProjectName>
-        <jiraComponentId></jiraComponentId>
+        <jiraComponentId />
     </properties>
     
     <scm>
         <connection>scm:git:https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</url>
-    </scm>
+      <tag>plugin-chatbot-1.0.0</tag>
+  </scm>
  
 </project>
