@@ -39,6 +39,8 @@ import fr.paris.lutece.plugins.chatbot.business.Post;
 import fr.paris.lutece.plugins.chatbot.service.BotService;
 import static fr.paris.lutece.plugins.chatbot.service.BotService.getBots;
 import fr.paris.lutece.plugins.chatbot.service.ChatService;
+import fr.paris.lutece.portal.service.util.AppPathService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.portal.util.mvc.xpage.MVCApplication;
@@ -62,23 +64,29 @@ import javax.servlet.http.HttpServletRequest;
 public class ChatBotApp extends MVCApplication
 {
     private static final String TEMPLATE_BOT = "/skin/plugins/chatbot/bot.html";
+    private static final String TEMPLATE_BOT_STANDALONE = "/skin/plugins/chatbot/bot_standalone.html";
     private static final String TEMPLATE_BOTS_LIST = "/skin/plugins/chatbot/bots_list.html";
     private static final String MARK_BOTS_LIST = "bots_list";
     private static final String MARK_POSTS_LIST = "posts_list";
     private static final String MARK_BOT_AVATAR = "bot_avatar";
+    private static final String MARK_BASE_URL = "base_url";
     private static final String PARAMETER_BOT = "bot";
     private static final String PARAMETER_RESPONSE = "response";
     private static final String PARAMETER_LANGUAGE = "lang";
+    private static final String PARAMETER_STANDALONE = "standalone";
     private static final String VIEW_LIST = "list";
     private static final String VIEW_BOT = "bot";
     private static final String ACTION_RESPONSE = "response";
     private static final String URL_BOT = "jsp/site/Portal.jsp?page=chatbot&view=bot";
+    private static final String PROPERTY_STANDALONE = "chatbot.standalone";
+    
     private static final long serialVersionUID = 1L;
 
     private String _strBotKey;
     private Locale _locale;
     private String _strConversationId;
     private ChatBot _bot;
+    private boolean _bStandalone;
 
     /**
      * Returns the content of the list of bots page
@@ -127,6 +135,7 @@ public class ChatBotApp extends MVCApplication
                 _bot = BotService.getBot( _strBotKey );
                 _locale = getBotLocale( request );
                 _strConversationId = getNewConversationId( );
+                _bStandalone = getStandalone( request );
             }
         }
         
@@ -134,10 +143,13 @@ public class ChatBotApp extends MVCApplication
         Map<String, Object> model = getModel( );
         model.put( MARK_POSTS_LIST, listPosts );
         model.put( MARK_BOT_AVATAR, _bot.getAvatarUrl( ) );
+        model.put( MARK_BASE_URL , AppPathService.getBaseUrl( request ));
 
-        XPage xpage = getXPage( TEMPLATE_BOT, request.getLocale( ), model );
+        String strTemplate = ( _bStandalone ) ? TEMPLATE_BOT_STANDALONE : TEMPLATE_BOT;
+        XPage xpage = getXPage( strTemplate, request.getLocale( ), model );
         xpage.setTitle( _bot.getName( _locale ) );
         xpage.setPathLabel( _bot.getName( _locale ) );
+        xpage.setStandalone( _bStandalone );
 
         return xpage;
     }
@@ -231,5 +243,20 @@ public class ChatBotApp extends MVCApplication
     private String getNewConversationId( )
     {
         return UUID.randomUUID( ).toString( );
+    }
+
+    private boolean getStandalone( HttpServletRequest request )
+    {
+        String strStandalone = request.getParameter( PARAMETER_STANDALONE );
+        if( strStandalone != null &&  (strStandalone.equalsIgnoreCase( "true" ) || strStandalone.equalsIgnoreCase( "on" )) )
+        {
+            return true;
+        }
+        strStandalone = AppPropertiesService.getProperty(  PROPERTY_STANDALONE );
+        if( strStandalone != null && (strStandalone.equalsIgnoreCase( "true" ) || strStandalone.equalsIgnoreCase( "on" )) )
+        {
+            return true;
+        }
+        return false;
     }
 }
