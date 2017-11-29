@@ -1,20 +1,51 @@
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <img class="img-responsive" src="images/skin/plugins/chatbot/bot-top.jpg" alt="bot picture" />
-    </div>
-</div> 
-<div class="row">
-    <#list bots_list as bot>
-    <a href="${bot.url!'bot url missing'}" >
-        <div class="col-md-8 col-md-offset-2">
-            <div class="jumbotron">
-                <h3> <img src="${bot.avatarUrl}" class="botIcon" alt="bot avatar" />
-                    ${bot.name!'bot name missing'}
-                </h3>
-                <p>${bot.description!'bot description missing'}</p>
-                <p><small>${bot.language!'bot language missing'}</small><p>
-            </div> 
-        </div>
-    </a>
-    </#list>
+	<div class="col-xs-12">
+		<div class="container">
+			<img class="img-responsive" src="images/skin/plugins/chatbot/bot-top.jpg" alt="bot picture" />
+		</div>
+	</div>
+	
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<#list bots_list as bot>
+				<a href="${bot.url!'bot url missing'}" >
+					<div class="col-xs-12 col-sm-6">
+						<div class="well">
+								<h3>
+										${bot.name!'bot name missing'}
+										<img src="${bot.avatarUrl}" class="botIcon" alt="bot avatar" />
+								</h3>
+								<p>${bot.description!'bot description missing'}</p>
+								<p class="label label-info">${bot.language!'bot language missing'}</p>
+						</div> 
+					</div>
+				</a>
+				</#list>
+			</div>
+		</div>
+	</div>
 </div>
+<div class="chatbot-sticky sticky-bottom sticky-right">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title clearfix">Demandez moi <i class="fa fa-comment-o"></i></h3>
+            <span class="fa fa-remove"></span>
+        </div>
+    <div class="panel-body">
+       <iframe src="jsp/site/Portal.jsp?page=chatbot&view=bot&bot=test&lang=fr" ></iframe>
+    </div>
+    </div>
+</div>
+<script>
+ (function($){
+        $(".chatbot-sticky").click( function(e){
+            $(this).toggleClass("in");
+            $(".chatbot-sticky .panel-title .fa-comment-o").toggleClass("fa-commenting");
+            $(".chatbot-sticky .panel-body").slideToggle();
+        ;
+        }); 
+    })(jQuery);    
+ 
+
+</script>
