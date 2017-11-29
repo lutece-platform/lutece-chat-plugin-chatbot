@@ -110,3 +110,78 @@
 .bubble p {
     font-size: 1.4em;
 }
+
+
+/*** Style pour sticky bottom right ***/
+.chatbot-sticky{
+    position: fixed;
+    z-index: 1031;
+}
+
+.sticky-top{
+    top: 0;
+}
+
+.sticky-bottom{
+    bottom: 0;
+}
+.sticky-left{
+    left: 15px;
+}
+.sticky-right{
+    right: 15px;
+}
+
+.chatbot-sticky .panel{
+     margin-bottom: 0;
+}
+.chatbot-sticky .panel-heading{
+    position: relative;
+}
+.chatbot-sticky .panel-heading .fa-remove{
+    display: none;
+}
+
+.sticky-bottom .panel{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.sticky-top .panel{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.chatbot-sticky.in .panel-heading .fa-remove{
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+.chatbot-sticky .panel-body{
+    display: none;
+    padding: 0;
+    height: 400px;
+}
+
+/*** Style Iframe***/
+.chatbot-sticky .panel-body iframe{
+    border: 0;
+    height: 400px;
+}
+
+.chatInput {
+    position: fixed;
+    border: 5px solid #fff;
+	top: 0;
+	right: 0;
+	left: 0;
+}
+
+.chatContainer {
+    overflow: hidden;
+    background-color: #5298BC;
+    margin: 0;
+    padding:0  5px;
+}
