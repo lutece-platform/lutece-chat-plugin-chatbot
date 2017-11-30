@@ -172,16 +172,15 @@
 }
 
 #standAloneChatContainer .chatInput {
-	/* position: fixed;
+	position: fixed;
 	border: 5px solid #fff;
-	top: 0;
+	bottom: 0;
 	right: 0;
 	left: 0; */
 }
 
-.chatContainer {
+#standAloneChatContainer .chatContainer {
     overflow: hidden;
-    /* background-color: #5298BC; */
     margin: 0;
-    padding:0  5px;
+    padding:10px;
 }
