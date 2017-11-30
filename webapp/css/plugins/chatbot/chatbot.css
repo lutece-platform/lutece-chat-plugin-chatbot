@@ -32,7 +32,9 @@
 }
 
 .chatInput {
-    /* max-width: 600px; */
+  /* max-width: 600px; */
+	border-top:1px solid #f1f5f8;
+	padding-top:20px;
 }
 .botAvatar {
     width:48px;
