@@ -171,7 +171,7 @@
     height: 400px;
 }
 
-.chatInput {
+#standAloneChatContainer .chatInput {
 	/* position: fixed;
 	border: 5px solid #fff;
 	top: 0;
