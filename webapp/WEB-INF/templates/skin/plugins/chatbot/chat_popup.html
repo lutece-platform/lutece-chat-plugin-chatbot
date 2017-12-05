@@ -1,0 +1,23 @@
+<div class="chatbot-sticky sticky-bottom sticky-right">
+    <div class="panel panel-info">
+			<div class="panel-heading">
+					<h3 class="panel-title clearfix">Demandez moi <i class="fa fa-comment-o"></i></h3>
+					<span class="fa fa-remove"></span>
+			</div>
+			<div class="panel-body">
+				 <iframe src="jsp/site/Portal.jsp?page=chatbot&view=bot&bot=test&lang=fr&standalone=true" ></iframe>
+			</div>
+    </div>
+</div>
+<script>
+ (function($){
+        $(".chatbot-sticky").click( function(e){
+            $(this).toggleClass("in");
+            $(".chatbot-sticky .panel-title .fa-comment-o").toggleClass("fa-commenting");
+            $(".chatbot-sticky .panel-body").slideToggle();
+        ;
+        }); 
+    })(jQuery);    
+ 
+
+</script>

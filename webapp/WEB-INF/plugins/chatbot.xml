@@ -33,5 +33,14 @@
             <application-class>fr.paris.lutece.plugins.chatbot.web.ChatBotApp</application-class>
         </application>
     </applications>
+    
+    <!-- Page Includes -->
+    <page-include-services>
+        <page-include-service> 
+            <page-include-service-name>ChatBot Popup Include Service</page-include-service-name> 
+            <page-include-service-class>fr.paris.lutece.plugins.chatbot.web.ChatPageInclude</page-include-service-class> 
+        </page-include-service>
+    </page-include-services>
+    I
 
 </plug-in>
