@@ -23,14 +23,22 @@
             </subsection>
         </section>
         <section name="Usage">
+            <subsection name="As a web page">
             <p>
-                For Front office bots :
+                For Front office web bots :
             </p>
             <p>
                 <pre>
   http://domain.com/context/jsp/site/Portal.jsp?page=chatbot
                 </pre>
             </p>
+            </subsection>
+            <subsection name="As a popup available on all pages ">
+            <p>
+                To display a popup available on all pages of a site using a page include :
+                add a bookmark <b>${chat_popup_include}</b> into the page_frameset.html file.
+            </p>
+            </subsection>
         </section>
     </body>
 </document>

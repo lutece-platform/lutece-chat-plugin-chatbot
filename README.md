@@ -13,7 +13,9 @@ See the [online demo](http://dev.lutece.paris.fr/incubator/jsp/site/Portal.jsp?p
 
 # Usage
 
-For Front office bots :
+## As a web page
+
+For Front office web bots :
 
 
 ```
@@ -22,6 +24,10 @@ For Front office bots :
                 
 ```
 
+
+## As a popup available on all pages 
+
+To display a popup available on all pages of a site using a page include : add a bookmark **${chat_popup_include}** into the page_frameset.html file.
 
 
 [Maven documentation and reports](http://dev.lutece.paris.fr/plugins/plugin-chatbot/)
