@@ -42,10 +42,13 @@ public class Post implements Serializable
 {
     public static final int AUTHOR_BOT = 0;
     public static final int AUTHOR_USER = 1;
+    public static final String CONTENT_TYPE_TEXT = "text";
+    public static final String CONTENT_TYPE_IMAGE = "image";
     private static final long serialVersionUID = 1L;
 
     // Variables declarations
     private String _strContent;
+    private String _strContentType = CONTENT_TYPE_TEXT;
     private int _nAuthor;
 
     /**
@@ -67,6 +70,27 @@ public class Post implements Serializable
     public void setContent( String strContent )
     {
         _strContent = strContent;
+    }
+
+    /**
+     * Returns the ContentType
+     * 
+     * @return The ContentType
+     */
+    public String getContentType( )
+    {
+        return _strContentType;
+    }
+
+    /**
+     * Sets the ContentType
+     * 
+     * @param strContentType
+     *            The ContentType
+     */
+    public void setContentType( String strContentType )
+    {
+        _strContentType = strContentType;
     }
 
     /**

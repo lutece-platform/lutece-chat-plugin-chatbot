@@ -93,4 +93,11 @@ public interface ChatBot
      * @return The URL
      */
     String getAvatarUrl( );
+    
+    /**
+     * Is standalone (mode for iframe)
+     * @return true if standalone
+     */
+    boolean isStandalone();
+   
 }

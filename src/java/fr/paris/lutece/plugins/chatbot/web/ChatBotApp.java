@@ -135,7 +135,7 @@ public class ChatBotApp extends MVCApplication
                 _bot = BotService.getBot( _strBotKey );
                 _locale = getBotLocale( request );
                 _strConversationId = getNewConversationId( );
-                _bStandalone = getStandalone( request );
+                _bStandalone = ( _bot.isStandalone() ) ? true : getStandalone( request );
             }
         }
         

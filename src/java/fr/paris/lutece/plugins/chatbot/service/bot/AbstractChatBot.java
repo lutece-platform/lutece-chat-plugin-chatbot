@@ -58,6 +58,7 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     private String _strDescriptionI18nKey;
     private String _strBotAvatarUrl;
     private List<String> _listAvailableLanguages;
+    private boolean _bStandalone;
 
     /**
      * Returns the Key
@@ -232,14 +233,31 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     }
 
     /**
-     * Return available languages list
-     * 
-     * @return available languages list
+     * {@inheritDoc }
      */
     @Override
     public List<String> getAvailableLanguages( )
     {
         return _listAvailableLanguages;
+    }
+    
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public boolean isStandalone()
+    {
+        return _bStandalone;
+    }
+
+    /**
+     * Sets the Standalone
+     *
+     * @param bStandalone The Standalone
+     */
+    public void setStandalone( boolean bStandalone )
+    {
+        _bStandalone = bStandalone;
     }
 
     /**

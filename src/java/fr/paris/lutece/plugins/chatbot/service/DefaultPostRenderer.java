@@ -78,12 +78,11 @@ public class DefaultPostRenderer implements PostRenderer
         Post rendered = new Post( );
         rendered.setAuthor( post.getAuthor( ) );
         String strContent = post.getContent( );
-        strContent = renderUrl( strContent );
-        rendered.setContent( strContent );
+        renderContent( rendered , strContent );
         return rendered;
     }
 
-    private String renderUrl( String strContent )
+    private void renderContent( Post rendered , String strContent )
     {
         StringBuilder sbRendered = new StringBuilder( );
         Matcher matcher = PATTERN_URL.matcher( strContent );
@@ -94,12 +93,24 @@ public class DefaultPostRenderer implements PostRenderer
             int nMatchEnd = matcher.end( );
             String strUrl = strContent.substring( nMatchStart, nMatchEnd );
             sbRendered.append( strContent.substring( nPos, nMatchStart ) );
-            sbRendered.append( "<a href=\"" ).append( strUrl ).append( "\">" ).append( strUrl ).append( "</a>" );
+            if( strUrl.endsWith( ".gif") || strUrl.endsWith( ".jpg") )
+            {
+                sbRendered.append( "<img src=\"" ).append( strUrl ).append( "\">" );
+                rendered.setContentType( Post.CONTENT_TYPE_IMAGE );
+            }
+            else
+            {
+                sbRendered.append( "<a href=\"" ).append( strUrl ).append( "\">" ).append( strUrl ).append( "</a>" );
+            }
             nPos = nMatchEnd;
         }
         sbRendered.append( strContent.substring( nPos ) );
+        
+        String strRendered = sbRendered.toString( );
 
-        return sbRendered.toString( );
+        strRendered = strRendered.replace( '\n', ' ' );
+        strRendered = strRendered.replace( '\r', ' ' );
+        rendered.setContent( strRendered );
     }
 
 }
