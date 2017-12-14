@@ -50,6 +50,7 @@ import fr.paris.lutece.portal.web.xpages.XPage;
 import fr.paris.lutece.util.url.UrlItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -167,8 +168,12 @@ public class ChatBotApp extends MVCApplication
         String strMessage = request.getParameter( PARAMETER_RESPONSE );
 
         ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
+        Map<String,String> mapParameters = new HashMap<>();
+        mapParameters.put( PARAMETER_BOT, _strBotKey );
+        mapParameters.put( PARAMETER_LANGUAGE, _locale.getLanguage() );
+        mapParameters.put( PARAMETER_STANDALONE, _bStandalone ? "true" : "false" );
 
-        return redirectView( request, VIEW_BOT );
+        return redirect( request, VIEW_BOT , mapParameters );
     }
 
     /**

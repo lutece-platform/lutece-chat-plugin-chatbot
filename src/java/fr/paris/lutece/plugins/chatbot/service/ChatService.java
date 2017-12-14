@@ -34,6 +34,7 @@
 
 package fr.paris.lutece.plugins.chatbot.service;
 
+import fr.paris.lutece.plugins.chatbot.business.BotPost;
 import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.plugins.chatbot.business.ChatData;
 import fr.paris.lutece.plugins.chatbot.business.Post;
@@ -92,10 +93,10 @@ public final class ChatService
         {
             data.addUserPost( strMessage );
             ChatBot bot = BotService.getBot( strBotKey );
-            List<String> listMessages = bot.processUserMessage( strMessage, strConversationId, locale );
-            for ( String strBotMessage : listMessages )
+            List<BotPost> listMessages = bot.processUserMessage( strMessage, strConversationId, locale );
+            for ( BotPost post : listMessages )
             {
-                data.addBotPost( strBotMessage );
+                data.addBotPost( post );
             }
         }
     }

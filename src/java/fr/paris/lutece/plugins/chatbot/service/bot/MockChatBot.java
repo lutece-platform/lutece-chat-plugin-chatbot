@@ -31,8 +31,10 @@
  *
  * License 1.0
  */
-
 package fr.paris.lutece.plugins.chatbot.service.bot;
+
+import fr.paris.lutece.plugins.chatbot.business.BotPost;
+import fr.paris.lutece.plugins.chatbot.business.Post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +47,11 @@ public class MockChatBot extends AbstractChatBot implements ChatBot
 {
 
     @Override
-    public List<String> processUserMessage( String strMessage, String strConversationId, Locale locale )
+    public List<BotPost> processUserMessage( String strMessage, String strConversationId, Locale locale )
     {
-        List<String> listMessages = new ArrayList<>( );
-        listMessages.add( "Hello !" );
+        List<BotPost> listMessages = new ArrayList<>( );
+        BotPost post = new BotPost( "Hello !" , Post.CONTENT_TYPE_TEXT );
+        listMessages.add( post );
         return listMessages;
     }
 

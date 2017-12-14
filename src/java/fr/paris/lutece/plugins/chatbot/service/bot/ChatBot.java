@@ -34,6 +34,8 @@
 
 package fr.paris.lutece.plugins.chatbot.service.bot;
 
+import fr.paris.lutece.plugins.chatbot.business.BotPost;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -78,7 +80,7 @@ public interface ChatBot
      *            The locale
      * @return The list of bot responses
      */
-    List<String> processUserMessage( String strMessage, String strConversationId, Locale locale );
+    List<BotPost> processUserMessage( String strMessage, String strConversationId, Locale locale );
 
     /**
      * Returns available languages

@@ -32,63 +32,18 @@
  * License 1.0
  */
 
+
 package fr.paris.lutece.plugins.chatbot.business;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * ChatData
+ * BotPost
  */
-public class ChatData
+public final class BotPost extends Post
 {
-    private List<Post> _listPosts = new ArrayList<>();
-    
-    /**
-     * Add a post
-     * 
-     * @param post
-     *            The post
-     */
-    public void addPost( Post post )
+    public BotPost( String strContent , String strContentType )
     {
-        _listPosts.add( post );
+        setContent( strContent );
+        setContentType( strContentType );
+        setAuthor( AUTHOR_BOT );
     }
-
-    /**
-     * Add a post
-     * 
-     * @param post
-     *            The Post
-     */
-    public void addBotPost( BotPost post )
-    {
-        addPost( post );
-    }
-
-    /**
-     * Add a post
-     * 
-     * @param strContent
-     *            The content
-     */
-    public void addUserPost( String strContent )
-    {
-        Post post = new Post();
-        post.setContent( strContent );
-        post.setContentType( Post.CONTENT_TYPE_TEXT );
-        post.setAuthor( Post.AUTHOR_USER );
-        addPost( post );
-    }
-
-    /**
-     * The post list
-     * 
-     * @return The list of all posts
-     */
-    public List<Post> getPosts( )
-    {
-        return _listPosts;
-    }
-
 }
