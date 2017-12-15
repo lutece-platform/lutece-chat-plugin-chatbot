@@ -37,17 +37,12 @@ package fr.paris.lutece.plugins.chatbot.service;
 import fr.paris.lutece.plugins.chatbot.business.Post;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * DefaultPostRenderer
  */
 public class DefaultPostRenderer implements PostRenderer
 {
-    // Pattern for recognizing a URL, based off RFC 3986
-    private static final Pattern PATTERN_URL = Pattern.compile( "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)" + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
-            + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL );
 
     /**
      * {@inheritDoc }
@@ -77,6 +72,7 @@ public class DefaultPostRenderer implements PostRenderer
     {
         Post rendered = new Post( );
         rendered.setAuthor( post.getAuthor( ) );
+        rendered.setContentType( post.getContentType() );
         String strContent = post.getContent( );
         renderContent( rendered , strContent );
         return rendered;
@@ -84,29 +80,9 @@ public class DefaultPostRenderer implements PostRenderer
 
     private void renderContent( Post rendered , String strContent )
     {
-        StringBuilder sbRendered = new StringBuilder( );
-        Matcher matcher = PATTERN_URL.matcher( strContent );
-        int nPos = 0;
-        while ( matcher.find( ) )
-        {
-            int nMatchStart = matcher.start( 1 );
-            int nMatchEnd = matcher.end( );
-            String strUrl = strContent.substring( nMatchStart, nMatchEnd );
-            sbRendered.append( strContent.substring( nPos, nMatchStart ) );
-            if( strUrl.endsWith( ".gif") || strUrl.endsWith( ".jpg") )
-            {
-                sbRendered.append( "<img src=\"" ).append( strUrl ).append( "\">" );
-                rendered.setContentType( Post.CONTENT_TYPE_IMAGE );
-            }
-            else
-            {
-                sbRendered.append( "<a href=\"" ).append( strUrl ).append( "\">" ).append( strUrl ).append( "</a>" );
-            }
-            nPos = nMatchEnd;
-        }
-        sbRendered.append( strContent.substring( nPos ) );
+
         
-        String strRendered = sbRendered.toString( );
+        String strRendered = strContent;
 
         strRendered = strRendered.replace( '\n', ' ' );
         strRendered = strRendered.replace( '\r', ' ' );
