@@ -71,6 +71,9 @@ public class ChatBotApp extends MVCApplication
     private static final String MARK_POSTS_LIST = "posts_list";
     private static final String MARK_BOT_AVATAR = "bot_avatar";
     private static final String MARK_BASE_URL = "base_url";
+    private static final String MARK_BOT = "bot";
+    private static final String MARK_LANGUAGE = "language";
+    private static final String MARK_STANDALONE = "standalone";
     private static final String PARAMETER_BOT = "bot";
     private static final String PARAMETER_RESPONSE = "response";
     private static final String PARAMETER_LANGUAGE = "lang";
@@ -145,6 +148,9 @@ public class ChatBotApp extends MVCApplication
         model.put( MARK_POSTS_LIST, listPosts );
         model.put( MARK_BOT_AVATAR, _bot.getAvatarUrl( ) );
         model.put( MARK_BASE_URL , AppPathService.getBaseUrl( request ));
+        model.put( MARK_BOT , _strBotKey );
+        model.put( MARK_LANGUAGE, _locale.getLanguage() );
+        model.put( MARK_STANDALONE , ( _bStandalone ) ? "true" : "false" );
 
         String strTemplate = ( _bStandalone ) ? TEMPLATE_BOT_STANDALONE : TEMPLATE_BOT;
         XPage xpage = getXPage( strTemplate, request.getLocale( ), model );
