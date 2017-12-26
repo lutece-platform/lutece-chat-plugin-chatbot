@@ -81,12 +81,14 @@ public class DefaultPostRenderer implements PostRenderer
     private void renderContent( Post rendered , String strContent )
     {
 
-        
-        String strRendered = strContent;
+        if( strContent != null )
+        {    
+            String strRendered = strContent;
 
-        strRendered = strRendered.replace( '\n', ' ' );
-        strRendered = strRendered.replace( '\r', ' ' );
-        rendered.setContent( strRendered );
+            strRendered = strRendered.replace( '\n', ' ' );
+            strRendered = strRendered.replace( '\r', ' ' );
+            rendered.setContent( strRendered );
+        }
     }
 
 }

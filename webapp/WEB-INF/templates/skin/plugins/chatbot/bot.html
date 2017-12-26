@@ -62,7 +62,7 @@
             strings: ["<#if posts_list?size != 0 >${posts_list[posts_list?size-1].content}</#if>"],
             // stringsElement: $('#typed-strings'),
             typeSpeed: 1,
-            backDelay: 500,
+            backDelay: 200,
             loop: false,
             contentType: 'html', // or text
             // defaults to false for infinite loop
@@ -78,4 +78,9 @@
         $("#input").focus();
 
     });
-    </script>
+</script>
+
+<script>
+    // Scroll to the bottom of the conversation
+    document.body.scrollIntoView(false);
+</script>
