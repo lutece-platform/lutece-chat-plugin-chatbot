@@ -97,6 +97,11 @@ public final class BotService
      */
     public static ChatBot getBot( String strBotKey )
     {
+        if ( ! _bInitFromContextFiles )
+        {
+            initFromContextFiles();
+            _bInitFromContextFiles = true;
+        }
         return _mapBots.get( strBotKey );
     }
 
