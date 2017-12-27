@@ -50,7 +50,7 @@ public class MockChatBot extends AbstractChatBot implements ChatBot
     public List<BotPost> processUserMessage( String strMessage, String strConversationId, Locale locale )
     {
         List<BotPost> listMessages = new ArrayList<>( );
-        BotPost post = new BotPost( "Hello !" , Post.CONTENT_TYPE_TEXT );
+        BotPost post = new BotPost( "Hello !", Post.CONTENT_TYPE_TEXT );
         listMessages.add( post );
         return listMessages;
     }

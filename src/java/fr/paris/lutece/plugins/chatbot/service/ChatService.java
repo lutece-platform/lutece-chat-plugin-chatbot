@@ -55,7 +55,6 @@ public final class ChatService
     private static Map<String, ChatData> _mapConversations = new HashMap<>( );
     private static PostRenderer _renderer = SpringContextService.getBean( "chatbot.postRenderer" );
 
-
     /**
      * Private constructor
      */
@@ -92,7 +91,7 @@ public final class ChatService
         }
         if ( !bResetConversation )
         {
-            data.addUserPost( extractUserMessage( strMessage ));
+            data.addUserPost( extractUserMessage( strMessage ) );
             ChatBot bot = BotService.getBot( strBotKey );
             List<BotPost> listMessages = bot.processUserMessage( strMessage, strConversationId, locale );
             for ( BotPost post : listMessages )
@@ -118,21 +117,22 @@ public final class ChatService
         }
         return _renderer.render( data.getPosts( ) );
     }
-    
+
     /**
      * Extract user message : all text before the pipe character
-     * @param strMessage The input message
+     * 
+     * @param strMessage
+     *            The input message
      * @return The output message
      */
     private static String extractUserMessage( String strMessage )
     {
         int nPos = strMessage.indexOf( '|' );
-        if( nPos > 0 )
+        if ( nPos > 0 )
         {
-            return strMessage.substring( 0 , nPos );
+            return strMessage.substring( 0, nPos );
         }
         return strMessage;
     }
-
 
 }

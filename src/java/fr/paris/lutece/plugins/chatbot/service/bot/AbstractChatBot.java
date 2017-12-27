@@ -41,8 +41,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * Bot
  */
@@ -240,12 +238,12 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     {
         return _listAvailableLanguages;
     }
-    
+
     /**
      * {@inheritDoc }
      */
     @Override
-    public boolean isStandalone()
+    public boolean isStandalone( )
     {
         return _bStandalone;
     }
@@ -253,7 +251,8 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     /**
      * Sets the Standalone
      *
-     * @param bStandalone The Standalone
+     * @param bStandalone
+     *            The Standalone
      */
     public void setStandalone( boolean bStandalone )
     {
@@ -263,23 +262,21 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     /**
      * Last bot post build with data collected. Default implementation. Should be override
      * 
-     * @param request
-     *            The HTTP request
      * @param mapData
      *            The data
      * @param locale
      *            The locale
      * @return The last message
      */
-    public String processData( HttpServletRequest request, Map<String, String> mapData, Locale locale )
+    public String processData( Map<String, String> mapData, Locale locale )
     {
         String strLastMessage = I18nService.getLocalizedString( PROPERTY_LAST_MESSAGE, locale );
         StringBuilder sbLastMessage = new StringBuilder( strLastMessage );
         sbLastMessage.append( "<ul>" );
 
-        for ( Entry entry : mapData.entrySet() )
+        for ( Entry entry : mapData.entrySet( ) )
         {
-            sbLastMessage.append( "<li>" ).append( entry.getKey() ).append( " : " ).append( entry.getValue() ).append( "</li>" );
+            sbLastMessage.append( "<li>" ).append( entry.getKey( ) ).append( " : " ).append( entry.getValue( ) ).append( "</li>" );
         }
 
         sbLastMessage.append( "</ul>" );

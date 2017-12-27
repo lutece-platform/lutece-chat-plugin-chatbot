@@ -42,8 +42,8 @@ import java.util.List;
  */
 public class ChatData
 {
-    private List<Post> _listPosts = new ArrayList<>();
-    
+    private List<Post> _listPosts = new ArrayList<>( );
+
     /**
      * Add a post
      * 
@@ -74,7 +74,7 @@ public class ChatData
      */
     public void addUserPost( String strContent )
     {
-        Post post = new Post();
+        Post post = new Post( );
         post.setContent( strContent );
         post.setContentType( Post.CONTENT_TYPE_TEXT );
         post.setAuthor( Post.AUTHOR_USER );

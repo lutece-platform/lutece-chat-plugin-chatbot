@@ -55,15 +55,15 @@ public class ChatPageInclude implements PageInclude
 
     /**
      * {@inheritDoc }
-     */        
+     */
     @Override
-    public void fillTemplate(Map<String, Object> rootModel, PageData data, int nMode, HttpServletRequest request)
+    public void fillTemplate( Map<String, Object> rootModel, PageData data, int nMode, HttpServletRequest request )
     {
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = new HashMap<>( );
         String strBotUrl = AppPropertiesService.getProperty( PROPERTY_CHAT_POPUP_BOT_URL );
-        model.put( MARK_BOT_URL , strBotUrl );
-        HtmlTemplate tChatPopup = AppTemplateService.getTemplate( TEMPLATE_CHAT_POPUP, request.getLocale() , model );
-        rootModel.put( MARK_CHAT_POPUP , tChatPopup.getHtml() );
+        model.put( MARK_BOT_URL, strBotUrl );
+        HtmlTemplate tChatPopup = AppTemplateService.getTemplate( TEMPLATE_CHAT_POPUP, request.getLocale( ), model );
+        rootModel.put( MARK_CHAT_POPUP, tChatPopup.getHtml( ) );
     }
 
 }

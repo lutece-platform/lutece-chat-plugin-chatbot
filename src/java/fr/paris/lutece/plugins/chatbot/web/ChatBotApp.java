@@ -85,7 +85,7 @@ public class ChatBotApp extends MVCApplication
     private static final String ACTION_BUTTON_RESPONSE = "button_click";
     private static final String URL_BOT = "jsp/site/Portal.jsp?page=chatbot&view=bot";
     private static final String PROPERTY_STANDALONE = "chatbot.standalone";
-    
+
     private static final long serialVersionUID = 1L;
 
     private String _strBotKey;
@@ -123,10 +123,10 @@ public class ChatBotApp extends MVCApplication
     public XPage viewBot( HttpServletRequest request )
     {
         String strBotKey = request.getParameter( PARAMETER_BOT );
-        if( strBotKey == null )
+        if ( strBotKey == null )
         {
             // assuming the bot is the current session bot
-            if( _strBotKey == null )
+            if ( _strBotKey == null )
             {
                 // session is closed
                 return redirectView( request, VIEW_LIST );
@@ -134,21 +134,21 @@ public class ChatBotApp extends MVCApplication
         }
         else
         {
-            if( ! strBotKey.equals( _strBotKey ) )
+            if ( !strBotKey.equals( _strBotKey ) )
             {
                 // new bot or bot has changed
                 initSessionParameters( request, strBotKey );
             }
         }
-        
+
         List<Post> listPosts = ChatService.getConversation( _strConversationId );
         Map<String, Object> model = getModel( );
         model.put( MARK_POSTS_LIST, listPosts );
         model.put( MARK_BOT_AVATAR, _bot.getAvatarUrl( ) );
-        model.put( MARK_BASE_URL , AppPathService.getBaseUrl( request ));
-        model.put( MARK_BOT , _strBotKey );
-        model.put( MARK_LANGUAGE, _locale.getLanguage() );
-        model.put( MARK_STANDALONE , ( _bStandalone ) ? "true" : "false" );
+        model.put( MARK_BASE_URL, AppPathService.getBaseUrl( request ) );
+        model.put( MARK_BOT, _strBotKey );
+        model.put( MARK_LANGUAGE, _locale.getLanguage( ) );
+        model.put( MARK_STANDALONE, ( _bStandalone ) ? "true" : "false" );
 
         String strTemplate = ( _bStandalone ) ? TEMPLATE_BOT_STANDALONE : TEMPLATE_BOT;
         XPage xpage = getXPage( strTemplate, request.getLocale( ), model );
@@ -169,39 +169,46 @@ public class ChatBotApp extends MVCApplication
     @Action( ACTION_RESPONSE )
     public XPage doProcessMessage( HttpServletRequest request )
     {
-        if( ! checkSession( request ) )
+        if ( !checkSession( request ) )
         {
             return redirectView( request, VIEW_LIST );
         }
-        
+
         String strMessage = request.getParameter( PARAMETER_RESPONSE );
-       
+
         ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
-        Map<String,String> mapParameters = new HashMap<>();
+        Map<String, String> mapParameters = new HashMap<>( );
         mapParameters.put( PARAMETER_BOT, _strBotKey );
-        mapParameters.put( PARAMETER_LANGUAGE, _locale.getLanguage() );
+        mapParameters.put( PARAMETER_LANGUAGE, _locale.getLanguage( ) );
         mapParameters.put( PARAMETER_STANDALONE, _bStandalone ? "true" : "false" );
 
-        return redirect( request, VIEW_BOT , mapParameters );
+        return redirect( request, VIEW_BOT, mapParameters );
     }
-    
+
+    /**
+     * Process Button click
+     * 
+     * @param request
+     *            The HTTP request
+     * @return The redirected page
+     */
     @Action( ACTION_BUTTON_RESPONSE )
     public XPage doProcessButtonMessage( HttpServletRequest request )
     {
-        if( ! checkSession( request ) )
+        if ( !checkSession( request ) )
         {
             return redirectView( request, VIEW_LIST );
         }
-        
+
         String strMessage = request.getParameter( PARAMETER_BUTTON_VALUE );
 
         ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
-        Map<String,String> mapParameters = new HashMap<>();
+        Map<String, String> mapParameters = new HashMap<>( );
         mapParameters.put( PARAMETER_BOT, _strBotKey );
-        mapParameters.put( PARAMETER_LANGUAGE, _locale.getLanguage() );
+        mapParameters.put( PARAMETER_LANGUAGE, _locale.getLanguage( ) );
         mapParameters.put( PARAMETER_STANDALONE, _bStandalone ? "true" : "false" );
 
-        return redirect( request, VIEW_BOT , mapParameters );
+        return redirect( request, VIEW_BOT, mapParameters );
     }
 
     /**
@@ -279,19 +286,21 @@ public class ChatBotApp extends MVCApplication
     }
 
     /**
-     * Gets the running mode according configuration and runtime parameters 
-     * @param request The HTTP request
+     * Gets the running mode according configuration and runtime parameters
+     * 
+     * @param request
+     *            The HTTP request
      * @return true if the current bit should be run in standalone mode
      */
     private boolean getStandalone( HttpServletRequest request )
     {
         String strStandalone = request.getParameter( PARAMETER_STANDALONE );
-        if( strStandalone != null &&  (strStandalone.equalsIgnoreCase( "true" ) || strStandalone.equalsIgnoreCase( "on" )) )
+        if ( strStandalone != null && ( strStandalone.equalsIgnoreCase( "true" ) || strStandalone.equalsIgnoreCase( "on" ) ) )
         {
             return true;
         }
-        strStandalone = AppPropertiesService.getProperty(  PROPERTY_STANDALONE );
-        if( strStandalone != null && (strStandalone.equalsIgnoreCase( "true" ) || strStandalone.equalsIgnoreCase( "on" )) )
+        strStandalone = AppPropertiesService.getProperty( PROPERTY_STANDALONE );
+        if ( strStandalone != null && ( strStandalone.equalsIgnoreCase( "true" ) || strStandalone.equalsIgnoreCase( "on" ) ) )
         {
             return true;
         }
@@ -300,17 +309,19 @@ public class ChatBotApp extends MVCApplication
 
     /**
      * Check the session
-     * @param request The HTTP request
+     * 
+     * @param request
+     *            The HTTP request
      * @return true if the bot session is active or can be restarted otherwise false
      */
     private boolean checkSession( HttpServletRequest request )
     {
-        if( _strBotKey == null )
+        if ( _strBotKey == null )
         {
             String strBotKey = request.getParameter( PARAMETER_BOT );
-            if( strBotKey != null )
+            if ( strBotKey != null )
             {
-                initSessionParameters( request , strBotKey );
+                initSessionParameters( request, strBotKey );
             }
             else
             {
@@ -321,9 +332,12 @@ public class ChatBotApp extends MVCApplication
     }
 
     /**
-     * Initialize session datas 
-     * @param request The request
-     * @param strBotKey The bot key
+     * Initialize session datas
+     * 
+     * @param request
+     *            The request
+     * @param strBotKey
+     *            The bot key
      */
     private void initSessionParameters( HttpServletRequest request, String strBotKey )
     {
@@ -331,6 +345,6 @@ public class ChatBotApp extends MVCApplication
         _bot = BotService.getBot( _strBotKey );
         _locale = getBotLocale( request );
         _strConversationId = getNewConversationId( );
-        _bStandalone = ( _bot.isStandalone() ) ? true : getStandalone( request );
+        _bStandalone = ( _bot.isStandalone( ) ) ? true : getStandalone( request );
     }
 }

@@ -46,8 +46,8 @@ import java.util.Map;
  */
 public final class BotService
 {
-    private static Map< String ,ChatBot > _mapBots = new HashMap<>();
-    
+    private static Map<String, ChatBot> _mapBots = new HashMap<>( );
+
     private static boolean _bInitFromContextFiles;
 
     /** Private constructor */
@@ -62,26 +62,30 @@ public final class BotService
      */
     public static List<ChatBot> getBots( )
     {
-        if ( ! _bInitFromContextFiles )
+        if ( !_bInitFromContextFiles )
         {
-            initFromContextFiles();
+            initFromContextFiles( );
             _bInitFromContextFiles = true;
         }
-        return new ArrayList<ChatBot>( _mapBots.values() );
+        return new ArrayList<ChatBot>( _mapBots.values( ) );
     }
 
     /**
      * Register a bot from an other module
-     * @param chatbot The chatbot to register
+     * 
+     * @param chatbot
+     *            The chatbot to register
      */
     public static void register( ChatBot chatbot )
     {
-        _mapBots.put(  chatbot.getKey() , chatbot );
+        _mapBots.put( chatbot.getKey( ), chatbot );
     }
 
     /**
-     * Unregister a bot 
-     * @param strChatBotKey The chatbot key
+     * Unregister a bot
+     * 
+     * @param strChatBotKey
+     *            The chatbot key
      */
     public static void unregister( String strChatBotKey )
     {
@@ -97,20 +101,20 @@ public final class BotService
      */
     public static ChatBot getBot( String strBotKey )
     {
-        if ( ! _bInitFromContextFiles )
+        if ( !_bInitFromContextFiles )
         {
-            initFromContextFiles();
+            initFromContextFiles( );
             _bInitFromContextFiles = true;
         }
         return _mapBots.get( strBotKey );
     }
 
     /**
-     * Init chatbots list from chatbot defined in context files 
+     * Init chatbots list from chatbot defined in context files
      */
-    private static void initFromContextFiles()
+    private static void initFromContextFiles( )
     {
-        for( ChatBot chatbot : SpringContextService.getBeansOfType( ChatBot.class ))
+        for ( ChatBot chatbot : SpringContextService.getBeansOfType( ChatBot.class ) )
         {
             register( chatbot );
         }

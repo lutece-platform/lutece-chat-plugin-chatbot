@@ -66,28 +66,37 @@ public class DefaultPostRenderer implements PostRenderer
      * 
      * @param post
      *            The post
-     * @return
+     * @return The rendered Post
+     * 
      */
     private Post renderPost( Post post )
     {
         Post rendered = new Post( );
         rendered.setAuthor( post.getAuthor( ) );
-        rendered.setContentType( post.getContentType() );
+        rendered.setContentType( post.getContentType( ) );
         String strContent = post.getContent( );
-        renderContent( rendered , strContent );
+        renderContent( rendered, strContent );
         return rendered;
     }
 
-    private void renderContent( Post rendered , String strContent )
+    /**
+     * Render content
+     * 
+     * @param postToRender
+     *            The rendered post
+     * @param strContent
+     *            The content
+     */
+    private void renderContent( Post postToRender, String strContent )
     {
 
-        if( strContent != null )
-        {    
+        if ( strContent != null )
+        {
             String strRendered = strContent;
 
             strRendered = strRendered.replace( '\n', ' ' );
             strRendered = strRendered.replace( '\r', ' ' );
-            rendered.setContent( strRendered );
+            postToRender.setContent( strRendered );
         }
     }
 

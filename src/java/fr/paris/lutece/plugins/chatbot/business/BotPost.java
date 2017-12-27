@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.chatbot.business;
 
 /**
@@ -40,7 +39,7 @@ package fr.paris.lutece.plugins.chatbot.business;
  */
 public final class BotPost extends Post
 {
-    public BotPost( String strContent , String strContentType )
+    public BotPost( String strContent, String strContentType )
     {
         setContent( strContent );
         setContentType( strContentType );
