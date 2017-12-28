@@ -53,6 +53,55 @@ public class Post implements Serializable
     private int _nAuthor;
 
     /**
+     * Constructor
+     */
+    public Post( )
+    {
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param strContent
+     *            The content
+     * 
+     *            NB : Default content type is 'text'
+     */
+    public Post( String strContent )
+    {
+        _strContent = strContent;
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param strContent
+     *            The content
+     * @param nAuthor
+     *            The author
+     * 
+     *            NB : Default content type is 'text'
+     */
+    public Post( String strContent, int nAuthor )
+    {
+        _strContent = strContent;
+        _nAuthor = nAuthor;
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param strContent
+     *            The content
+     */
+    public Post( String strContent, String strContentType, int nAuthor )
+    {
+        _strContent = strContent;
+        _strContentType = strContentType;
+        _nAuthor = nAuthor;
+    }
+
+    /**
      * Returns the Content
      * 
      * @return The Content

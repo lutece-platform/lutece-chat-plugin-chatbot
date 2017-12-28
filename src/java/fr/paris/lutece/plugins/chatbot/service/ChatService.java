@@ -108,12 +108,16 @@ public final class ChatService
      *            Conversation Id
      * @return The list of post
      */
-    public static List<Post> getConversation( String strConversationId )
+    public static List<Post> getConversation( String strConversationId, ChatBot bot )
     {
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
             data = new ChatData( );
+            if ( bot.getWelcomeMessage( ) != null )
+            {
+                data.addBotPost( new BotPost( bot.getWelcomeMessage( ) ) );
+            }
         }
         return _renderer.render( data.getPosts( ) );
     }

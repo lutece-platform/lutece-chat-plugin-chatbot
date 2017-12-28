@@ -39,10 +39,26 @@ package fr.paris.lutece.plugins.chatbot.business;
  */
 public final class BotPost extends Post
 {
+    /**
+     * Constructor
+     * 
+     * @param strContent
+     *            The Message
+     */
+    public BotPost( String strContent )
+    {
+        super( strContent, AUTHOR_BOT );
+    }
+
+    /**
+     * 
+     * @param strContent
+     *            The message
+     * @param strContentType
+     *            The type of message
+     */
     public BotPost( String strContent, String strContentType )
     {
-        setContent( strContent );
-        setContentType( strContentType );
-        setAuthor( AUTHOR_BOT );
+        super( strContent, strContentType, AUTHOR_BOT );
     }
 }

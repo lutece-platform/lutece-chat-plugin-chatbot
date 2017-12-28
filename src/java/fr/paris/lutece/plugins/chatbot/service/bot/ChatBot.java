@@ -103,4 +103,10 @@ public interface ChatBot
      */
     boolean isStandalone( );
 
+    /**
+     * The welcome message
+     * 
+     * @return The welcome message
+     */
+    String getWelcomeMessage( );
 }

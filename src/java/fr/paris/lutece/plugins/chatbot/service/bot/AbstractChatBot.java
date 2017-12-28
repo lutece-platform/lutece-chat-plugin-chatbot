@@ -57,6 +57,7 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     private String _strBotAvatarUrl;
     private List<String> _listAvailableLanguages;
     private boolean _bStandalone;
+    private String _strWelcomeMessage;
 
     /**
      * Returns the Key
@@ -257,6 +258,28 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     public void setStandalone( boolean bStandalone )
     {
         _bStandalone = bStandalone;
+    }
+
+    /**
+     * Returns the WelcomeMessage
+     * 
+     * @return The WelcomeMessage
+     */
+    @Override
+    public String getWelcomeMessage( )
+    {
+        return _strWelcomeMessage;
+    }
+
+    /**
+     * Sets the WelcomeMessage
+     * 
+     * @param strWelcomeMessage
+     *            The WelcomeMessage
+     */
+    public void setWelcomeMessage( String strWelcomeMessage )
+    {
+        _strWelcomeMessage = strWelcomeMessage;
     }
 
     /**

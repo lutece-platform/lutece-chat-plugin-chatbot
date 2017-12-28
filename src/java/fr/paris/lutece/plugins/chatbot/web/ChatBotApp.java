@@ -141,7 +141,7 @@ public class ChatBotApp extends MVCApplication
             }
         }
 
-        List<Post> listPosts = ChatService.getConversation( _strConversationId );
+        List<Post> listPosts = ChatService.getConversation( _strConversationId, _bot );
         Map<String, Object> model = getModel( );
         model.put( MARK_POSTS_LIST, listPosts );
         model.put( MARK_BOT_AVATAR, _bot.getAvatarUrl( ) );
