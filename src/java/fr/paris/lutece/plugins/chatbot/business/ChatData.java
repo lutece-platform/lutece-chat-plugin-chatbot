@@ -43,6 +43,14 @@ import java.util.List;
 public class ChatData
 {
     private List<Post> _listPosts = new ArrayList<>( );
+    
+    public ChatData( String strWelcomeMessage )
+    {
+        if ( strWelcomeMessage != null && ! strWelcomeMessage.trim().equals( "" ) )
+        {
+            _listPosts.add( new BotPost( strWelcomeMessage ) );
+        }
+    }
 
     /**
      * Add a post

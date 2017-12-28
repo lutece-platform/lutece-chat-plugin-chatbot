@@ -86,7 +86,8 @@ public final class ChatService
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
-            data = new ChatData( );
+            ChatBot bot = BotService.getBot( strBotKey );
+            data = new ChatData( bot.getWelcomeMessage() );
             _mapConversations.put( strConversationId, data );
         }
         if ( !bResetConversation )
@@ -113,11 +114,7 @@ public final class ChatService
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
-            data = new ChatData( );
-            if ( bot.getWelcomeMessage( ) != null )
-            {
-                data.addBotPost( new BotPost( bot.getWelcomeMessage( ) ) );
-            }
+            data = new ChatData( bot.getWelcomeMessage() );
         }
         return _renderer.render( data.getPosts( ) );
     }
