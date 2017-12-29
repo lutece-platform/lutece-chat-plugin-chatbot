@@ -113,6 +113,10 @@
     font-size: 1.4em;
 }
 
+.bubble .btn {
+	margin:20px 0 15px 0;
+}
+
 
 /*** Style pour sticky bottom right ***/
 .chatbot-sticky{
@@ -167,8 +171,8 @@
     height: 400px;
 }
 
-/*** Style Iframe***/
-.chatbot-sticky .panel-body iframe{
+/*** Style Iframe ***/
+.chatbot-sticky .panel-body iframe {
     border: 0;
     height: 400px;
 }
@@ -178,7 +182,7 @@
 	border: 5px solid #fff;
 	bottom: 0;
 	right: 0;
-	left: 0; */
+	left: 0;
 }
 
 #standAloneChatContainer .chatContainer {
