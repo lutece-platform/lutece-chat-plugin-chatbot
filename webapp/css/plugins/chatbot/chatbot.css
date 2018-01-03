@@ -23,9 +23,8 @@
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#c0c0c0, Direction=180, Strength=5);
 }
 
-.chatContainer {
+#chatContainer {
     min-height: 400px;
-    /* max-width: 600px; */
 }
 .chatBox {
     clear:both;
@@ -185,7 +184,7 @@
 	left: 0;
 }
 
-#standAloneChatContainer .chatContainer {
+#standAloneChatContainer #chatContainer {
     overflow: hidden;
     margin: 0;
     padding:10px;
