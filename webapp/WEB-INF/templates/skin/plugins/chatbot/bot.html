@@ -1,4 +1,3 @@
-<script src="js/plugins/chatbot/typed.js" type="text/javascript"></script>
 
 <div class="row">
     <div class="col-xs-12">
@@ -13,7 +12,12 @@
                             <div class="bubble <#if post.author==1>bubble-alt</#if>">
                                 <#if post.contentType == "text">
                                 <#if (post_index+1) == posts_list?size>
-                                <span id="typed"></span>
+                                    <#if typed_script >
+                                        <span id="typed"></span>
+                                    <#else>
+                                        <i class="fa fa-spinner fa-spin fa-fw"></i><span class="sr-only">Loading...</span>
+                                        <span class="fade-in-post"> ${post.content} </span>
+                                    </#if>
                                 <#else>
                                 ${post.content}
                                 </#if>
@@ -36,7 +40,7 @@
                         <input type="hidden" name="language" value="${language}" />
                         <input type="hidden" name="standalone" value="${standalone}" />
                         <div class="input-group">
-                            <input id="input" type="text" name="response" class="form-control input-sm" required>
+                            <input id="input" type="text" name="response" class="form-control input-sm" autocomplete="off" required>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary btn-sm" type="submit" >
                                     <i class="fa fa-comment"></i>
@@ -48,41 +52,51 @@
                 </div>
             </div>
         </div>
-        <!--    
-        <div class="col-md-3 pull-left hidden-xs">
-            <img class="img-responsive" src="images/skin/plugins/chatbot/bot-side.jpg" alt="bot picture" />
-        </div>
-        -->
     </div>
 </div>
-<script>
-    $(function () {
 
-        $("#typed").typed({
-            strings: ["<#if posts_list?size != 0 >${posts_list[posts_list?size-1].content}</#if>"],
-            // stringsElement: $('#typed-strings'),
-            typeSpeed: 1,
-            backDelay: 200,
-            loop: false,
-            contentType: 'html', // or text
-            // defaults to false for infinite loop
-            loopCount: false,
-            callback: function () {
-                foo();
-            },
-            resetCallback: function () {
-                newTyped();
-            }
+<#if typed_script >
+    <script src="js/plugins/chatbot/typed.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+
+            $("#typed").typed({
+                strings: ["<#if posts_list?size != 0 >${posts_list[posts_list?size-1].content}</#if>"],
+                // stringsElement: $('#typed-strings'),
+                typeSpeed: 1,
+                backDelay: 200,
+                loop: false,
+                contentType: 'html', // or text
+                // defaults to false for infinite loop
+                loopCount: false,
+                callback: function () {
+                    foo();
+                },
+                resetCallback: function () {
+                    newTyped();
+                }
+            });
+
+            $("#input").focus();
+
         });
+    </script>   
 
-        $(".reset").click(function () {
-            $("#typed").typed('reset');
-        });
+ <#else>    
 
+    <script>
+        $(function () {
+
+        $(".fa-spinner").delay( 1000 ).fadeOut( 500 );
+        $(".fade-in-post").toggle().delay( 1500 ).fadeIn( 500 );
+        
         $("#input").focus();
+        });
+    </script>
 
-    });
-</script>
+</#if>
+
+
 
 <script>
     // Scroll to the bottom of the conversation

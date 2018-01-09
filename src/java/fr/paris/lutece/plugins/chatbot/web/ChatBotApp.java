@@ -74,6 +74,7 @@ public class ChatBotApp extends MVCApplication
     private static final String MARK_BOT = "bot";
     private static final String MARK_LANGUAGE = "language";
     private static final String MARK_STANDALONE = "standalone";
+    private static final String MARK_TYPED_SCRIPT = "typed_script";
     private static final String PARAMETER_BOT = "bot";
     private static final String PARAMETER_RESPONSE = "response";
     private static final String PARAMETER_LANGUAGE = "lang";
@@ -85,6 +86,9 @@ public class ChatBotApp extends MVCApplication
     private static final String ACTION_BUTTON_RESPONSE = "button_click";
     private static final String URL_BOT = "jsp/site/Portal.jsp?page=chatbot&view=bot";
     private static final String PROPERTY_STANDALONE = "chatbot.standalone";
+    private static final String PROPERTY_TYPED_SCRIPT = "chatbot.typed_script.enabled";
+    
+    private static final boolean DEFAULT_TYPED_SCRIPT = true;
 
     private static final long serialVersionUID = 1L;
 
@@ -140,7 +144,7 @@ public class ChatBotApp extends MVCApplication
                 initSessionParameters( request, strBotKey );
             }
         }
-
+        boolean bTypedScript = AppPropertiesService.getPropertyBoolean( PROPERTY_TYPED_SCRIPT , DEFAULT_TYPED_SCRIPT );
         List<Post> listPosts = ChatService.getConversation( _strConversationId, _bot );
         Map<String, Object> model = getModel( );
         model.put( MARK_POSTS_LIST, listPosts );
@@ -149,6 +153,7 @@ public class ChatBotApp extends MVCApplication
         model.put( MARK_BOT, _strBotKey );
         model.put( MARK_LANGUAGE, _locale.getLanguage( ) );
         model.put( MARK_STANDALONE, ( _bStandalone ) ? "true" : "false" );
+        model.put(  MARK_TYPED_SCRIPT , bTypedScript );
 
         String strTemplate = ( _bStandalone ) ? TEMPLATE_BOT_STANDALONE : TEMPLATE_BOT;
         XPage xpage = getXPage( strTemplate, request.getLocale( ), model );
