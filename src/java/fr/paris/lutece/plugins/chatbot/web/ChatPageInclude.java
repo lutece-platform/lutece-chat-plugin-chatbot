@@ -38,6 +38,7 @@ import fr.paris.lutece.portal.service.content.PageData;
 import fr.paris.lutece.portal.service.includes.PageInclude;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import fr.paris.lutece.portal.web.l10n.LocaleService;
 import fr.paris.lutece.util.html.HtmlTemplate;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class ChatPageInclude implements PageInclude
         Map<String, Object> model = new HashMap<>( );
         String strBotUrl = AppPropertiesService.getProperty( PROPERTY_CHAT_POPUP_BOT_URL );
         model.put( MARK_BOT_URL, strBotUrl );
-        HtmlTemplate tChatPopup = AppTemplateService.getTemplate( TEMPLATE_CHAT_POPUP, request.getLocale( ), model );
+        HtmlTemplate tChatPopup = AppTemplateService.getTemplate( TEMPLATE_CHAT_POPUP, LocaleService.getDefault() , model );
         rootModel.put( MARK_CHAT_POPUP, tChatPopup.getHtml( ) );
     }
 
