@@ -1,29 +1,29 @@
 <div class="row">
-	<div class="col-xs-12">
-		<div class="container">
-			<img class="img-responsive" src="images/skin/plugins/chatbot/bot-top.jpg" alt="bot picture" />
-		</div>
-	</div>
-	
-	<div class="col-xs-12">
-		<div class="container">
-			<div class="row">
-				<#list bots_list as bot>
-				<a href="${bot.url!'bot url missing'}" >
-					<div class="col-xs-12 col-sm-6">
-						<div class="well">
-								<h3>
-										${bot.name!'bot name missing'}
-										<img src="${bot.avatarUrl}" class="botIcon" alt="bot avatar" />
-								</h3>
-								<p>${bot.description!'bot description missing'}</p>
-								<p class="label label-info">${bot.language!'bot language missing'}</p>
-						</div> 
-					</div>
-				</a>
-				</#list>
-			</div>
-		</div>
-	</div>
+    <div class="col-xs-12">
+        <div class="container">
+            <img class="img-responsive" src="images/skin/plugins/chatbot/bot-top.jpg" alt="bot picture" />
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="container">
+            <div class="row">
+                <#list bots_list as bot>
+                <a href="${bot.url!'bot url missing'}" >
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="well">
+                            <h3>
+                                ${bot.name!'bot name missing'}
+                                <img src="${bot.avatarUrl!''}" class="botIcon" alt="bot avatar" />
+                            </h3>
+                            <p>${bot.description!'bot description missing'}</p>
+                            <p class="label label-info">${bot.language!'bot language missing'}</p>
+                        </div> 
+                    </div>
+                </a>
+                </#list>
+            </div>
+        </div>
+    </div>
 </div>
 
