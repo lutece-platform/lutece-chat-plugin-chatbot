@@ -38,15 +38,12 @@ import fr.paris.lutece.portal.service.i18n.I18nService;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Bot
  */
 public abstract class AbstractChatBot implements ChatBot, Serializable
 {
-    private static final String PROPERTY_LAST_MESSAGE = "chatbot.bot.lastMessage";
     private static final String URL_DEFAULT_BOT_AVATAR = "images/skin/plugins/chatbot/bot-avatar.png";
     private static final long serialVersionUID = 1L;
     private String _strKey;
@@ -282,28 +279,13 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
         _strWelcomeMessage = strWelcomeMessage;
     }
 
+
     /**
-     * Last bot post build with data collected. Default implementation. Should be override
-     * 
-     * @param mapData
-     *            The data
-     * @param locale
-     *            The locale
-     * @return The last message
+     * {@inheritDoc }
      */
-    public String processData( Map<String, String> mapData, Locale locale )
+    @Override
+    public void reset( String strConversationId )
     {
-        String strLastMessage = I18nService.getLocalizedString( PROPERTY_LAST_MESSAGE, locale );
-        StringBuilder sbLastMessage = new StringBuilder( strLastMessage );
-        sbLastMessage.append( "<ul>" );
-
-        for ( Entry entry : mapData.entrySet( ) )
-        {
-            sbLastMessage.append( "<li>" ).append( entry.getKey( ) ).append( " : " ).append( entry.getValue( ) ).append( "</li>" );
-        }
-
-        sbLastMessage.append( "</ul>" );
-
-        return sbLastMessage.toString( );
+        
     }
 }

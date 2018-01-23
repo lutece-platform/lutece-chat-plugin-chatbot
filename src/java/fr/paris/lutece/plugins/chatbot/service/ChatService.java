@@ -78,23 +78,26 @@ public final class ChatService
      */
     public static void processMessage( HttpServletRequest request, String strConversationId, String strMessage, String strBotKey, Locale locale )
     {
-        boolean bResetConversation = RESET.equals( strMessage );
+        ChatBot bot = BotService.getBot( strBotKey );
+        String strUserMessage = extractUserMessage( strMessage );   // Message displayed in the conversation (part before '|')
+        String strUserCodifiedMessage= extractUserCodifiedMessage( strMessage);  // Message send to the bot as user message (part after '|')
+
+        boolean bResetConversation = RESET.equalsIgnoreCase( strUserCodifiedMessage );
         if ( bResetConversation )
         {
             _mapConversations.remove( strConversationId );
+            bot.reset( strConversationId );
         }
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
-            ChatBot bot = BotService.getBot( strBotKey );
             data = new ChatData( bot.getWelcomeMessage() );
             _mapConversations.put( strConversationId, data );
         }
         if ( !bResetConversation )
         {
-            data.addUserPost( extractUserMessage( strMessage ) );
-            ChatBot bot = BotService.getBot( strBotKey );
-            List<BotPost> listMessages = bot.processUserMessage( strMessage, strConversationId, locale );
+            data.addUserPost( strUserMessage );
+            List<BotPost> listMessages = bot.processUserMessage( strUserCodifiedMessage, strConversationId, locale );
             for ( BotPost post : listMessages )
             {
                 data.addBotPost( post );
@@ -107,6 +110,8 @@ public final class ChatService
      * 
      * @param strConversationId
      *            Conversation Id
+     * @param bot The bot
+     * 
      * @return The list of post
      */
     public static List<Post> getConversation( String strConversationId, ChatBot bot )
@@ -136,4 +141,22 @@ public final class ChatService
         return strMessage;
     }
 
+    
+    /**
+     * Extract user message : all text before the pipe character
+     * 
+     * @param strMessage
+     *            The input message
+     * @return The output message
+     */
+    private static String extractUserCodifiedMessage( String strMessage )
+    {
+        int nPos = strMessage.indexOf( '|' );
+        if ( ( nPos > 0 ) && ( nPos < strMessage.length() ))
+        {
+            return strMessage.substring( nPos + 1 );
+        }
+        return strMessage;
+    }
+    
 }

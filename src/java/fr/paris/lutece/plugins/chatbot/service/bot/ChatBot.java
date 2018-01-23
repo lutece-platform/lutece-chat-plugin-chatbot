@@ -109,4 +109,11 @@ public interface ChatBot
      * @return The welcome message
      */
     String getWelcomeMessage( );
+    
+    
+    /**
+     * Reset the conversation
+     * @param strConversationId The conversation ID
+     */
+    void reset( String strConversationId );
 }
