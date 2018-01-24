@@ -10,7 +10,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>plugin-chatbot</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <name>Lutece chatbot plugin</name>
 
     <repositories>
@@ -52,7 +52,7 @@
         <connection>scm:git:https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-chat-plugin-chatbot.git</url>
-      <tag>HEAD</tag>
+      <tag>lutece-chat-plugin-chatbot-1.0.2</tag>
   </scm>
  
 </project>
