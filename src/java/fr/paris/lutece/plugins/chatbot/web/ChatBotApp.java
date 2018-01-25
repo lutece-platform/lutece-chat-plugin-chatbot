@@ -273,6 +273,8 @@ public class ChatBotApp extends MVCApplication
                 botDescription.setName( bot.getName( locale ) );
                 botDescription.setDescription( bot.getDescription( locale ) );
                 botDescription.setLanguage( locale.getDisplayLanguage( ) );
+                botDescription.setAvatarUrl( bot.getAvatarUrl( ) );
+                
                 UrlItem url = new UrlItem( URL_BOT );
                 url.addParameter( PARAMETER_BOT, bot.getKey( ) );
                 url.addParameter( PARAMETER_LANGUAGE, locale.getLanguage() );
