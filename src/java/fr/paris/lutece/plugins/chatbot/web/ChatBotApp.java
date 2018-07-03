@@ -145,7 +145,7 @@ public class ChatBotApp extends MVCApplication
             }
         }
         boolean bTypedScript = AppPropertiesService.getPropertyBoolean( PROPERTY_TYPED_SCRIPT , DEFAULT_TYPED_SCRIPT );
-        List<Post> listPosts = ChatService.getConversation( _strConversationId, _bot );
+        List<Post> listPosts = ChatService.getConversation( _strConversationId, _bot, _locale );
         Map<String, Object> model = getModel( );
         model.put( MARK_POSTS_LIST, listPosts );
         model.put( MARK_BOT_AVATAR, _bot.getAvatarUrl( ) );

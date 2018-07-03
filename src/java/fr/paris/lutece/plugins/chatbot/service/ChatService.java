@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * ChatService
@@ -97,6 +98,10 @@ public final class ChatService
         if ( !bResetConversation )
         {
             data.addUserPost( strUserMessage );
+        }
+
+        if ( !bResetConversation || StringUtils.isEmpty( bot.getWelcomeMessage( ) ) )
+        {
             List<BotPost> listMessages = bot.processUserMessage( strUserCodifiedMessage, strConversationId, locale );
             for ( BotPost post : listMessages )
             {
@@ -112,14 +117,24 @@ public final class ChatService
      *            Conversation Id
      * @param bot The bot
      * 
+     * @param locale
+     *            The locale
      * @return The list of post
      */
-    public static List<Post> getConversation( String strConversationId, ChatBot bot )
+    public static List<Post> getConversation( String strConversationId, ChatBot bot, Locale locale )
     {
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
-            data = new ChatData( bot.getWelcomeMessage() );
+            if ( StringUtils.isEmpty( bot.getWelcomeMessage() ) )
+            {
+                processMessage( null, strConversationId, "", bot.getKey( ), locale );
+                data = _mapConversations.get( strConversationId );
+            }
+            else
+            {
+                data = new ChatData( bot.getWelcomeMessage() );
+            }
         }
         return _renderer.render( data.getPosts( ) );
     }
