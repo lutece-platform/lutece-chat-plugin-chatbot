@@ -9,22 +9,24 @@
                         <#list posts_list as post >
                         <div class="chatBox">
                             <#if post.author!=1><img src="${bot_avatar}" class="botAvatar" alt="avatar" title=""></#if>
-                            <div class="bubble <#if post.author==1>bubble-alt</#if>">
-                                <#if post.contentType == "text">
-                                <#if (post_index+1) == posts_list?size>
-                                    <#if typed_script >
-                                        <span id="typed"></span>
+                            <#if post.content?has_content >
+                                <div class="bubble <#if post.author==1>bubble-alt</#if>">
+                                    <#if post.contentType == "text">
+                                    <#if (post_index+1) == posts_list?size>
+                                        <#if typed_script >
+                                            <span id="typed"></span>
+                                        <#else>
+                                            <i class="fa fa-spinner fa-spin fa-fw"></i><span class="sr-only">Loading...</span>
+                                            <span class="fade-in-post"> ${post.content} </span>
+                                        </#if>
                                     <#else>
-                                        <i class="fa fa-spinner fa-spin fa-fw"></i><span class="sr-only">Loading...</span>
-                                        <span class="fade-in-post"> ${post.content} </span>
+                                    ${post.content}
                                     </#if>
-                                <#else>
-                                ${post.content}
-                                </#if>
-                                <#else>
-                                ${post.content}
-                                </#if>
-                            </div>
+                                    <#else>
+                                    ${post.content}
+                                    </#if>
+                                </div>
+                            </#if>
                         </div>
                         </#list>
                     </div>
