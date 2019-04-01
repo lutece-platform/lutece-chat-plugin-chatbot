@@ -40,6 +40,25 @@
             </p>
             </subsection>
         </section>
+        <section name="Configuring conversation logging">
+            <p>
+                In the Lutece <b>config.properties</b> file add a specific logger as below :
+            </p>
+            <pre>
+                
+log4j.logger.lutece.chatbot=INFO, ChatBot
+                                
+# File "chatbot.log"
+log4j.appender.ChatBot=org.apache.log4j.RollingFileAppender
+log4j.appender.ChatBot.File=***** your logs path *****/chatbot.log
+log4j.appender.ChatBot.Append=true
+log4j.appender.ChatBot.layout=org.apache.log4j.PatternLayout
+log4j.appender.ChatBot.layout.ConversionPattern=%d{"dd/MM/yy", "HH:mm:ss"} ,%m%n
+log4j.appender.ChatBot.MaxFileSize=1000KB
+log4j.appender.ChatBot.MaxBackupIndex=5
+                
+            </pre>            
+        </section> 
     </body>
 </document>
 

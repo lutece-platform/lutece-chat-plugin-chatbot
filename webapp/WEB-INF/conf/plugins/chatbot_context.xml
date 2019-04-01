@@ -7,7 +7,9 @@
     
     <bean id="chatbot.postRenderer" class="fr.paris.lutece.plugins.chatbot.service.DefaultPostRenderer" />
     
-        
+    <bean id="chatbot.logger" class="fr.paris.lutece.plugins.chatbot.service.BotLogger" />    
+    
+    
 <!--
     <bean id="chatbot.mockChatBot" class="fr.paris.lutece.plugins.chatbot.service.bot.MockChatBot">
         <property name="key" value="test"/>

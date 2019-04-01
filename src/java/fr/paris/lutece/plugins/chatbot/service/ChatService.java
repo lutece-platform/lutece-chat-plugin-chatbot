@@ -56,6 +56,7 @@ public final class ChatService
     private static Map<String, ChatData> _mapConversations = new HashMap<>( );
     private static PostRenderer _renderer = SpringContextService.getBean( "chatbot.postRenderer" );
 
+ 
     /**
      * Private constructor
      */
@@ -106,6 +107,10 @@ public final class ChatService
             for ( BotPost post : listMessages )
             {
                 data.addBotPost( post );
+            }
+            for( BotListener listener : getBotListeners() )
+            {
+                listener.processBotResponse( request, strBotKey, strConversationId, strMessage, locale, listMessages );
             }
         }
     }
@@ -174,4 +179,13 @@ public final class ChatService
         return strMessage;
     }
     
+    /**
+     * Get the list of bot listeners
+     * @return The list
+     */
+    private static List<BotListener> getBotListeners()
+    {
+        return SpringContextService.getBeansOfType( BotListener.class );
+    }
+
 }

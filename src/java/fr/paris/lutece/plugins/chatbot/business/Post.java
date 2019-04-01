@@ -45,6 +45,7 @@ public class Post implements Serializable
     public static final String CONTENT_TYPE_TEXT = "text";
     public static final String CONTENT_TYPE_IMAGE = "image";
     public static final String CONTENT_TYPE_CARD = "card";
+    public static final String CONTENT_TYPE_QUICK_REPLIES = "quick replies";
     private static final long serialVersionUID = 1L;
 
     // Variables declarations
