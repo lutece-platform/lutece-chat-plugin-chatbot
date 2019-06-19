@@ -76,6 +76,7 @@ public class DefaultPostRenderer implements PostRenderer
         rendered.setContentType( post.getContentType( ) );
         String strContent = post.getContent( );
         renderContent( rendered, strContent );
+        rendered.setAvatarUrl( post.getAvatarUrl() );
         return rendered;
     }
 

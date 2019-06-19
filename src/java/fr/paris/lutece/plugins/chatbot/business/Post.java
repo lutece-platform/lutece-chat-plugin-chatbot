@@ -52,6 +52,7 @@ public class Post implements Serializable
     private String _strContent;
     private String _strContentType = CONTENT_TYPE_TEXT;
     private int _nAuthor;
+    private String _strAvatarUrl;
 
     /**
      * Constructor
@@ -94,6 +95,8 @@ public class Post implements Serializable
      * 
      * @param strContent
      *            The content
+     * @param strContentType
+     * @param nAuthor
      */
     public Post( String strContent, String strContentType, int nAuthor )
     {
@@ -164,4 +167,26 @@ public class Post implements Serializable
     {
         _nAuthor = nAuthor;
     }
+    
+    /**
+     * Returns the Avatar Url
+     * 
+     * @return The Avatar Url
+     */
+    public String getAvatarUrl( )
+    {
+        return _strAvatarUrl;
+    }
+
+    /**
+     * Sets the AvatarUrl
+     * 
+     * @param strAvatarUrl
+     *            The Avatar Url
+     */
+    public void setAvatarUrl( String strAvatarUrl )
+    {
+        _strAvatarUrl = strAvatarUrl;
+    }
+    
 }

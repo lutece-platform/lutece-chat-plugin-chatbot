@@ -35,6 +35,7 @@
 package fr.paris.lutece.plugins.chatbot.service.bot;
 
 import fr.paris.lutece.plugins.chatbot.business.BotPost;
+import fr.paris.lutece.plugins.chatbot.service.avatar.AvatarRenderer;
 
 import java.util.List;
 import java.util.Locale;
@@ -116,4 +117,10 @@ public interface ChatBot
      * @param strConversationId The conversation ID
      */
     void reset( String strConversationId );
+    
+    /**
+     * Get avatar renderer
+     * @return An avatar renderer
+     */
+    String getAvatarRendererKey();
 }

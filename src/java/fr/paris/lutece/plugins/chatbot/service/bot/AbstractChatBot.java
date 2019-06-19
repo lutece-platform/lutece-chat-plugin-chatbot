@@ -55,6 +55,7 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
     private List<String> _listAvailableLanguages;
     private boolean _bStandalone;
     private String _strWelcomeMessage;
+    private String _strAvatarRendererKey;
 
     /**
      * Returns the Key
@@ -279,6 +280,28 @@ public abstract class AbstractChatBot implements ChatBot, Serializable
         _strWelcomeMessage = strWelcomeMessage;
     }
 
+
+    /**
+     * Returns the AvatarRenderer Key
+     * 
+     * @return The AvatarRenderer Key
+     */
+    @Override
+    public String getAvatarRendererKey( )
+    {
+        return _strAvatarRendererKey;
+    }
+
+    /**
+     * Sets the AvatarRenderer
+     * 
+     * @param strAvatarRendererKey
+     *            The AvatarRenderer Key
+     */
+    public void setAvatarRendererKey( String strAvatarRendererKey )
+    {
+        _strAvatarRendererKey = strAvatarRendererKey;
+    }
 
     /**
      * {@inheritDoc }

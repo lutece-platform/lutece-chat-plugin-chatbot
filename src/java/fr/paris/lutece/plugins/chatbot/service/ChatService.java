@@ -38,6 +38,8 @@ import fr.paris.lutece.plugins.chatbot.business.BotPost;
 import fr.paris.lutece.plugins.chatbot.service.bot.ChatBot;
 import fr.paris.lutece.plugins.chatbot.business.ChatData;
 import fr.paris.lutece.plugins.chatbot.business.Post;
+import fr.paris.lutece.plugins.chatbot.service.avatar.AvatarRenderer;
+import fr.paris.lutece.plugins.chatbot.service.avatar.AvatarRendererService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import java.util.HashMap;
 import java.util.List;
@@ -106,6 +108,11 @@ public final class ChatService
             List<BotPost> listMessages = bot.processUserMessage( strUserCodifiedMessage, strConversationId, locale );
             for ( BotPost post : listMessages )
             {
+                AvatarRenderer avatarRenderer = AvatarRendererService.getAvatarRenderer( bot.getAvatarRendererKey() );
+                if( avatarRenderer != null )
+                {
+                    avatarRenderer.renderAvatar( post );
+                }
                 data.addBotPost( post );
             }
             for( BotListener listener : getBotListeners() )

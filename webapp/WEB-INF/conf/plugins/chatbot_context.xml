@@ -9,7 +9,13 @@
     
     <bean id="chatbot.logger" class="fr.paris.lutece.plugins.chatbot.service.BotLogger" />    
     
-    
+ 
+    <bean id="chatbot.defaultAvatarRenderer" class="fr.paris.lutece.plugins.chatbot.service.avatar.BaseAvatarRenderer">
+        <property name="key" value="default" />
+        <property name="name" value="Default chatbot avatar" />
+        <property name="avatarUrl" value="images/skin/plugins/chatbot/bot-avatar.png"/>
+    </bean>  
+     
 <!--
     <bean id="chatbot.mockChatBot" class="fr.paris.lutece.plugins.chatbot.service.bot.MockChatBot">
         <property name="key" value="test"/>
@@ -21,6 +27,7 @@
                 <value>fr</value>
             </list>
         </property>
+        <property name="avatarRendererKey" value="default" />   
     </bean>
 -->
 

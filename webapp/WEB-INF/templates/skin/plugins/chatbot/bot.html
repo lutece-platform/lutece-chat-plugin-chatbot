@@ -8,7 +8,13 @@
                     <div class="direct-chat-messages">
                         <#list posts_list as post >
                         <div class="chatBox">
-                            <#if post.author!=1><img src="${bot_avatar}" class="botAvatar" alt="avatar" title=""></#if>
+                            <#if post.author!=1>
+                                <#if post.avatarUrl ??>
+                                    <img src="${post.avatarUrl}" class="botAvatar" alt="avatar" title="">
+                                <#else>
+                                    <img src="${bot_avatar}" class="botAvatar" alt="avatar" title="">
+                                </#if>
+                            </#if>
                             <#if post.content?has_content >
                                 <div class="bubble <#if post.author==1>bubble-alt</#if>">
                                     <#if post.contentType == "text">
