@@ -31,11 +31,10 @@
  *
  * License 1.0
  */
-
-
 package fr.paris.lutece.plugins.chatbot.service.avatar;
 
 import fr.paris.lutece.portal.service.spring.SpringContextService;
+import fr.paris.lutece.util.ReferenceList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,16 +42,42 @@ import java.util.Map;
 /**
  * AvatarRendererService
  */
-public class AvatarRendererService 
+public class AvatarRendererService
 {
+
     private static Map<String, AvatarRenderer> _mapAvatarRenderer;
-    
+
     /**
      * Returns the avatar renderer for a given key
+     *
      * @param strKey Tha avatar renderer key
      * @return The renderer
      */
     public static AvatarRenderer getAvatarRenderer( String strKey )
+    {
+        return getAvatarRenderersMap().get( strKey );
+    }
+
+    /**
+     * Return the list off all avatar renderers available
+     *
+     * @return The list of renderers
+     */
+    public static ReferenceList getAvatarRenderersList()
+    {
+        ReferenceList list = new ReferenceList();
+        for( AvatarRenderer renderer : getAvatarRenderersMap().values() )
+        {
+            list.addItem( renderer.getKey(), renderer.getName() );
+        }
+        return list;
+    }
+
+    /**
+     * Get the Renderers registry map
+     * @return The map
+     */
+    private static Map<String, AvatarRenderer> getAvatarRenderersMap()
     {
         if( _mapAvatarRenderer == null )
         {
@@ -60,9 +85,9 @@ public class AvatarRendererService
             List<AvatarRenderer> listRenderers = SpringContextService.getBeansOfType( AvatarRenderer.class );
             for( AvatarRenderer renderer : listRenderers )
             {
-                _mapAvatarRenderer.put( renderer.getKey() , renderer );
+                _mapAvatarRenderer.put( renderer.getKey(), renderer );
             }
         }
-        return _mapAvatarRenderer.get( strKey );
+        return _mapAvatarRenderer;
     }
 }
