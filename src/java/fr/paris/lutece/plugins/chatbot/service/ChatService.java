@@ -105,6 +105,7 @@ public final class ChatService
 
         if ( !bResetConversation || StringUtils.isEmpty( bot.getWelcomeMessage( ) ) )
         {
+
             List<BotPost> listMessages = bot.processUserMessage( strUserCodifiedMessage, strConversationId, locale );
             for ( BotPost post : listMessages )
             {
