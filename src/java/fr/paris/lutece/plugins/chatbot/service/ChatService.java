@@ -139,15 +139,7 @@ public final class ChatService
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
-            if ( StringUtils.isEmpty( bot.getWelcomeMessage() ) )
-            {
-                processMessage( null, strConversationId, "", bot.getKey( ), locale );
-                data = _mapConversations.get( strConversationId );
-            }
-            else
-            {
-                data = new ChatData( bot.getWelcomeMessage() );
-            }
+            data = new ChatData( bot.getWelcomeMessage() );
         }
         return _renderer.render( data.getPosts( ) );
     }

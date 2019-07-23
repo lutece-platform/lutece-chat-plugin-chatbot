@@ -44,6 +44,10 @@ public class ChatData
 {
     private List<Post> _listPosts = new ArrayList<>( );
     
+    /**
+     * Constructor
+     * @param strWelcomeMessage An optional Welcome Message
+     */
     public ChatData( String strWelcomeMessage )
     {
         if ( strWelcomeMessage != null && ! strWelcomeMessage.trim().equals( "" ) )
