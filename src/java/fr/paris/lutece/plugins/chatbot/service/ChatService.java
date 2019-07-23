@@ -79,10 +79,15 @@ public final class ChatService
      *            The bot Key
      * @param locale
      *            The locale
+     * @throws InvalidBotKeyException If not bot found with the given key
      */
-    public static void processMessage( HttpServletRequest request, String strConversationId, String strMessage, String strBotKey, Locale locale )
+    public static void processMessage( HttpServletRequest request, String strConversationId, String strMessage, String strBotKey, Locale locale ) throws InvalidBotKeyException
     {
         ChatBot bot = BotService.getBot( strBotKey );
+        if( bot == null )
+        {
+            throw new InvalidBotKeyException( strBotKey );
+        }
         String strUserMessage = extractUserMessage( strMessage );   // Message displayed in the conversation (part before '|')
         String strUserCodifiedMessage= extractUserCodifiedMessage( strMessage);  // Message send to the bot as user message (part after '|')
 
@@ -139,7 +144,8 @@ public final class ChatService
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
-            data = new ChatData( bot.getWelcomeMessage() );
+            String strWelcomeMessage = ( bot != null ) ? bot.getWelcomeMessage() : null;
+            data = new ChatData( strWelcomeMessage );
         }
         return _renderer.render( data.getPosts( ) );
     }

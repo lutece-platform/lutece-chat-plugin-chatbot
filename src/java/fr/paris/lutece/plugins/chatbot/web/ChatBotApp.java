@@ -39,6 +39,8 @@ import fr.paris.lutece.plugins.chatbot.business.Post;
 import fr.paris.lutece.plugins.chatbot.service.BotService;
 import static fr.paris.lutece.plugins.chatbot.service.BotService.getBots;
 import fr.paris.lutece.plugins.chatbot.service.ChatService;
+import fr.paris.lutece.plugins.chatbot.service.InvalidBotKeyException;
+import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
@@ -67,6 +69,7 @@ public class ChatBotApp extends MVCApplication
     private static final String TEMPLATE_BOT = "/skin/plugins/chatbot/bot.html";
     private static final String TEMPLATE_BOT_STANDALONE = "/skin/plugins/chatbot/bot_standalone.html";
     private static final String TEMPLATE_BOTS_LIST = "/skin/plugins/chatbot/bots_list.html";
+    private static final String TEMPLATE_BOT_NOT_FOUND = "/skin/plugins/chatbot/bot_not_found.html";
     private static final String MARK_BOTS_LIST = "bots_list";
     private static final String MARK_POSTS_LIST = "posts_list";
     private static final String MARK_BOT_AVATAR = "bot_avatar";
@@ -82,6 +85,7 @@ public class ChatBotApp extends MVCApplication
     private static final String PARAMETER_BUTTON_VALUE = "button_value";
     private static final String VIEW_LIST = "list";
     private static final String VIEW_BOT = "bot";
+    private static final String VIEW_BOT_NOT_FOUND = "bot_not_found";
     private static final String ACTION_RESPONSE = "response";
     private static final String ACTION_BUTTON_RESPONSE = "button_click";
     private static final String URL_BOT = "jsp/site/Portal.jsp?page=chatbot&view=bot";
@@ -144,6 +148,10 @@ public class ChatBotApp extends MVCApplication
                 initSessionParameters( request, strBotKey );
             }
         }
+        if( _bot == null )
+        {
+            return redirectView( request, VIEW_BOT_NOT_FOUND );
+        }
         boolean bTypedScript = AppPropertiesService.getPropertyBoolean( PROPERTY_TYPED_SCRIPT , DEFAULT_TYPED_SCRIPT );
         List<Post> listPosts = ChatService.getConversation( _strConversationId, _bot, _locale );
         Map<String, Object> model = getModel( );
@@ -172,7 +180,7 @@ public class ChatBotApp extends MVCApplication
      * @return The redirected page
      */
     @Action( ACTION_RESPONSE )
-    public XPage doProcessMessage( HttpServletRequest request )
+    public XPage doProcessMessage( HttpServletRequest request ) 
     {
         if ( !checkSession( request ) )
         {
@@ -181,13 +189,23 @@ public class ChatBotApp extends MVCApplication
 
         String strMessage = request.getParameter( PARAMETER_RESPONSE );
 
-        ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
+        try 
+        {
+            ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
+        }
+        catch( InvalidBotKeyException ex )
+        {
+            return redirectView( request, VIEW_BOT_NOT_FOUND );
+        }
         Map<String, String> mapParameters = new HashMap<>( );
         mapParameters.put( PARAMETER_BOT, _strBotKey );
         mapParameters.put( PARAMETER_LANGUAGE, _locale.getLanguage( ) );
         mapParameters.put( PARAMETER_STANDALONE, _bStandalone ? "true" : "false" );
-
+      
         return redirect( request, VIEW_BOT, mapParameters );
+
+
+        
     }
 
     /**
@@ -207,7 +225,14 @@ public class ChatBotApp extends MVCApplication
 
         String strMessage = request.getParameter( PARAMETER_BUTTON_VALUE );
 
-        ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
+        try
+        {
+            ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
+        }
+        catch( InvalidBotKeyException ex )
+        {
+            return redirectView( request, VIEW_BOT_NOT_FOUND );
+        }
         Map<String, String> mapParameters = new HashMap<>( );
         mapParameters.put( PARAMETER_BOT, _strBotKey );
         mapParameters.put( PARAMETER_LANGUAGE, _locale.getLanguage( ) );
@@ -216,6 +241,12 @@ public class ChatBotApp extends MVCApplication
         return redirect( request, VIEW_BOT, mapParameters );
     }
 
+    @View ( VIEW_BOT_NOT_FOUND )
+    public XPage viewBotNotFound( HttpServletRequest request )
+    {
+         return getXPage( TEMPLATE_BOT_NOT_FOUND, request.getLocale( ) );
+    }
+    
     /**
      * Get request information for the bot language
      * 
@@ -354,8 +385,11 @@ public class ChatBotApp extends MVCApplication
     {
         _strBotKey = strBotKey;
         _bot = BotService.getBot( _strBotKey );
-        _locale = getBotLocale( request );
-        _strConversationId = getNewConversationId( );
-        _bStandalone = ( _bot.isStandalone( ) ) ? true : getStandalone( request );
+        if( _bot != null )
+        {
+            _locale = getBotLocale( request );
+            _strConversationId = getNewConversationId( );
+            _bStandalone = ( _bot.isStandalone( ) ) ? true : getStandalone( request );
+        }
     }
 }
