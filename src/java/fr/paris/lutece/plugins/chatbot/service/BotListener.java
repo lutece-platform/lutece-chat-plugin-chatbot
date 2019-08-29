@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.chatbot.service;
 
 import fr.paris.lutece.plugins.chatbot.business.BotPost;
@@ -43,16 +42,22 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * BotListener
  */
-public interface BotListener 
+public interface BotListener
 {
     /**
      * 
-     * @param request The HTTP request
-     * @param strBotKey The Bot ID
+     * @param request
+     *            The HTTP request
+     * @param strBotKey
+     *            The Bot ID
      * @param strConversationId
-     * @param strMessage The User message
-     * @param locale The locale
-     * @param listMessages The list of responses of the bot
+     * @param strMessage
+     *            The User message
+     * @param locale
+     *            The locale
+     * @param listMessages
+     *            The list of responses of the bot
      */
-    void processBotResponse( HttpServletRequest request, String strBotKey, String strConversationId, String strMessage, Locale locale, List<BotPost> listMessages );
+    void processBotResponse( HttpServletRequest request, String strBotKey, String strConversationId, String strMessage, Locale locale,
+            List<BotPost> listMessages );
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2017, Mairie de Paris
+ * Copyright (c) 2002-2019, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,7 +76,7 @@ public class DefaultPostRenderer implements PostRenderer
         rendered.setContentType( post.getContentType( ) );
         String strContent = post.getContent( );
         renderContent( rendered, strContent );
-        rendered.setAvatarUrl( post.getAvatarUrl() );
+        rendered.setAvatarUrl( post.getAvatarUrl( ) );
         return rendered;
     }
 

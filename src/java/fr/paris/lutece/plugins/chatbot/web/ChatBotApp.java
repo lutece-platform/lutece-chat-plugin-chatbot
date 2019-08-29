@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2017, Mairie de Paris
+ * Copyright (c) 2002-2019, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -91,7 +91,7 @@ public class ChatBotApp extends MVCApplication
     private static final String URL_BOT = "jsp/site/Portal.jsp?page=chatbot&view=bot";
     private static final String PROPERTY_STANDALONE = "chatbot.standalone";
     private static final String PROPERTY_TYPED_SCRIPT = "chatbot.typed_script.enabled";
-    
+
     private static final boolean DEFAULT_TYPED_SCRIPT = true;
 
     private static final long serialVersionUID = 1L;
@@ -148,11 +148,11 @@ public class ChatBotApp extends MVCApplication
                 initSessionParameters( request, strBotKey );
             }
         }
-        if( _bot == null )
+        if ( _bot == null )
         {
             return redirectView( request, VIEW_BOT_NOT_FOUND );
         }
-        boolean bTypedScript = AppPropertiesService.getPropertyBoolean( PROPERTY_TYPED_SCRIPT , DEFAULT_TYPED_SCRIPT );
+        boolean bTypedScript = AppPropertiesService.getPropertyBoolean( PROPERTY_TYPED_SCRIPT, DEFAULT_TYPED_SCRIPT );
         List<Post> listPosts = ChatService.getConversation( _strConversationId, _bot, _locale );
         Map<String, Object> model = getModel( );
         model.put( MARK_POSTS_LIST, listPosts );
@@ -161,7 +161,7 @@ public class ChatBotApp extends MVCApplication
         model.put( MARK_BOT, _strBotKey );
         model.put( MARK_LANGUAGE, _locale.getLanguage( ) );
         model.put( MARK_STANDALONE, ( _bStandalone ) ? "true" : "false" );
-        model.put(  MARK_TYPED_SCRIPT , bTypedScript );
+        model.put( MARK_TYPED_SCRIPT, bTypedScript );
 
         String strTemplate = ( _bStandalone ) ? TEMPLATE_BOT_STANDALONE : TEMPLATE_BOT;
         XPage xpage = getXPage( strTemplate, request.getLocale( ), model );
@@ -180,7 +180,7 @@ public class ChatBotApp extends MVCApplication
      * @return The redirected page
      */
     @Action( ACTION_RESPONSE )
-    public XPage doProcessMessage( HttpServletRequest request ) 
+    public XPage doProcessMessage( HttpServletRequest request )
     {
         if ( !checkSession( request ) )
         {
@@ -189,7 +189,7 @@ public class ChatBotApp extends MVCApplication
 
         String strMessage = request.getParameter( PARAMETER_RESPONSE );
 
-        try 
+        try
         {
             ChatService.processMessage( request, _strConversationId, strMessage, _strBotKey, _locale );
         }
@@ -201,11 +201,9 @@ public class ChatBotApp extends MVCApplication
         mapParameters.put( PARAMETER_BOT, _strBotKey );
         mapParameters.put( PARAMETER_LANGUAGE, _locale.getLanguage( ) );
         mapParameters.put( PARAMETER_STANDALONE, _bStandalone ? "true" : "false" );
-      
+
         return redirect( request, VIEW_BOT, mapParameters );
 
-
-        
     }
 
     /**
@@ -241,12 +239,12 @@ public class ChatBotApp extends MVCApplication
         return redirect( request, VIEW_BOT, mapParameters );
     }
 
-    @View ( VIEW_BOT_NOT_FOUND )
+    @View( VIEW_BOT_NOT_FOUND )
     public XPage viewBotNotFound( HttpServletRequest request )
     {
-         return getXPage( TEMPLATE_BOT_NOT_FOUND, request.getLocale( ) );
+        return getXPage( TEMPLATE_BOT_NOT_FOUND, request.getLocale( ) );
     }
-    
+
     /**
      * Get request information for the bot language
      * 
@@ -305,10 +303,10 @@ public class ChatBotApp extends MVCApplication
                 botDescription.setDescription( bot.getDescription( locale ) );
                 botDescription.setLanguage( locale.getDisplayLanguage( ) );
                 botDescription.setAvatarUrl( bot.getAvatarUrl( ) );
-                
+
                 UrlItem url = new UrlItem( URL_BOT );
                 url.addParameter( PARAMETER_BOT, bot.getKey( ) );
-                url.addParameter( PARAMETER_LANGUAGE, locale.getLanguage() );
+                url.addParameter( PARAMETER_LANGUAGE, locale.getLanguage( ) );
                 botDescription.setUrl( url.getUrl( ) );
                 list.add( botDescription );
             }
@@ -385,7 +383,7 @@ public class ChatBotApp extends MVCApplication
     {
         _strBotKey = strBotKey;
         _bot = BotService.getBot( _strBotKey );
-        if( _bot != null )
+        if ( _bot != null )
         {
             _locale = getBotLocale( request );
             _strConversationId = getNewConversationId( );

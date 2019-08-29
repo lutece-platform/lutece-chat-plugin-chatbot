@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2017, Mairie de Paris
+ * Copyright (c) 2002-2019, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,14 +43,16 @@ import java.util.List;
 public class ChatData
 {
     private List<Post> _listPosts = new ArrayList<>( );
-    
+
     /**
      * Constructor
-     * @param strWelcomeMessage An optional Welcome Message
+     * 
+     * @param strWelcomeMessage
+     *            An optional Welcome Message
      */
     public ChatData( String strWelcomeMessage )
     {
-        if ( strWelcomeMessage != null && ! strWelcomeMessage.trim().equals( "" ) )
+        if ( strWelcomeMessage != null && !strWelcomeMessage.trim( ).equals( "" ) )
         {
             _listPosts.add( new BotPost( strWelcomeMessage ) );
         }

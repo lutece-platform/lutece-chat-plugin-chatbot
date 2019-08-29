@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2017, Mairie de Paris
+ * Copyright (c) 2002-2019, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -110,17 +110,19 @@ public interface ChatBot
      * @return The welcome message
      */
     String getWelcomeMessage( );
-    
-    
+
     /**
      * Reset the conversation
-     * @param strConversationId The conversation ID
+     * 
+     * @param strConversationId
+     *            The conversation ID
      */
     void reset( String strConversationId );
-    
+
     /**
      * Get avatar renderer
+     * 
      * @return An avatar renderer
      */
-    String getAvatarRendererKey();
+    String getAvatarRendererKey( );
 }

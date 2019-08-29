@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2017, Mairie de Paris
+ * Copyright (c) 2002-2019, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -63,7 +63,7 @@ public class ChatPageInclude implements PageInclude
         Map<String, Object> model = new HashMap<>( );
         String strBotUrl = AppPropertiesService.getProperty( PROPERTY_CHAT_POPUP_BOT_URL );
         model.put( MARK_BOT_URL, strBotUrl );
-        HtmlTemplate tChatPopup = AppTemplateService.getTemplate( TEMPLATE_CHAT_POPUP, LocaleService.getDefault() , model );
+        HtmlTemplate tChatPopup = AppTemplateService.getTemplate( TEMPLATE_CHAT_POPUP, LocaleService.getDefault( ), model );
         rootModel.put( MARK_CHAT_POPUP, tChatPopup.getHtml( ) );
     }
 

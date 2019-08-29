@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2017, Mairie de Paris
+ * Copyright (c) 2002-2019, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,7 +58,6 @@ public final class ChatService
     private static Map<String, ChatData> _mapConversations = new HashMap<>( );
     private static PostRenderer _renderer = SpringContextService.getBean( "chatbot.postRenderer" );
 
- 
     /**
      * Private constructor
      */
@@ -79,17 +78,19 @@ public final class ChatService
      *            The bot Key
      * @param locale
      *            The locale
-     * @throws InvalidBotKeyException If not bot found with the given key
+     * @throws InvalidBotKeyException
+     *             If not bot found with the given key
      */
-    public static void processMessage( HttpServletRequest request, String strConversationId, String strMessage, String strBotKey, Locale locale ) throws InvalidBotKeyException
+    public static void processMessage( HttpServletRequest request, String strConversationId, String strMessage, String strBotKey, Locale locale )
+            throws InvalidBotKeyException
     {
         ChatBot bot = BotService.getBot( strBotKey );
-        if( bot == null )
+        if ( bot == null )
         {
             throw new InvalidBotKeyException( strBotKey );
         }
-        String strUserMessage = extractUserMessage( strMessage );   // Message displayed in the conversation (part before '|')
-        String strUserCodifiedMessage= extractUserCodifiedMessage( strMessage);  // Message send to the bot as user message (part after '|')
+        String strUserMessage = extractUserMessage( strMessage ); // Message displayed in the conversation (part before '|')
+        String strUserCodifiedMessage = extractUserCodifiedMessage( strMessage ); // Message send to the bot as user message (part after '|')
 
         boolean bResetConversation = RESET.equalsIgnoreCase( strUserCodifiedMessage );
         if ( bResetConversation )
@@ -100,7 +101,7 @@ public final class ChatService
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
-            data = new ChatData( bot.getWelcomeMessage() );
+            data = new ChatData( bot.getWelcomeMessage( ) );
             _mapConversations.put( strConversationId, data );
         }
         if ( !bResetConversation )
@@ -114,14 +115,14 @@ public final class ChatService
             List<BotPost> listMessages = bot.processUserMessage( strUserCodifiedMessage, strConversationId, locale );
             for ( BotPost post : listMessages )
             {
-                AvatarRenderer avatarRenderer = AvatarRendererService.getAvatarRenderer( bot.getAvatarRendererKey() );
-                if( avatarRenderer != null )
+                AvatarRenderer avatarRenderer = AvatarRendererService.getAvatarRenderer( bot.getAvatarRendererKey( ) );
+                if ( avatarRenderer != null )
                 {
                     avatarRenderer.renderAvatar( post );
                 }
                 data.addBotPost( post );
             }
-            for( BotListener listener : getBotListeners() )
+            for ( BotListener listener : getBotListeners( ) )
             {
                 listener.processBotResponse( request, strBotKey, strConversationId, strMessage, locale, listMessages );
             }
@@ -133,7 +134,8 @@ public final class ChatService
      * 
      * @param strConversationId
      *            Conversation Id
-     * @param bot The bot
+     * @param bot
+     *            The bot
      * 
      * @param locale
      *            The locale
@@ -144,7 +146,7 @@ public final class ChatService
         ChatData data = _mapConversations.get( strConversationId );
         if ( data == null )
         {
-            String strWelcomeMessage = ( bot != null ) ? bot.getWelcomeMessage() : null;
+            String strWelcomeMessage = ( bot != null ) ? bot.getWelcomeMessage( ) : null;
             data = new ChatData( strWelcomeMessage );
         }
         return _renderer.render( data.getPosts( ) );
@@ -167,7 +169,6 @@ public final class ChatService
         return strMessage;
     }
 
-    
     /**
      * Extract user message : all text before the pipe character
      * 
@@ -178,18 +179,19 @@ public final class ChatService
     private static String extractUserCodifiedMessage( String strMessage )
     {
         int nPos = strMessage.indexOf( '|' );
-        if ( ( nPos > 0 ) && ( nPos < strMessage.length() ))
+        if ( ( nPos > 0 ) && ( nPos < strMessage.length( ) ) )
         {
             return strMessage.substring( nPos + 1 );
         }
         return strMessage;
     }
-    
+
     /**
      * Get the list of bot listeners
+     * 
      * @return The list
      */
-    private static List<BotListener> getBotListeners()
+    private static List<BotListener> getBotListeners( )
     {
         return SpringContextService.getBeansOfType( BotListener.class );
     }

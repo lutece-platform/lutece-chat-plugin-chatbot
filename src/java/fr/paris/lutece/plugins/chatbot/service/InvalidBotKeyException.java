@@ -32,17 +32,18 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.chatbot.service;
 
 /**
  * InvalidBotKeyException
  */
-public class InvalidBotKeyException extends Exception 
+public class InvalidBotKeyException extends Exception
 {
     /**
      * Constructor
-     * @param strBotKey Bot key 
+     * 
+     * @param strBotKey
+     *            Bot key
      */
     public InvalidBotKeyException( String strBotKey )
     {

@@ -40,7 +40,7 @@ import fr.paris.lutece.plugins.chatbot.business.Post;
  */
 public class BaseAvatarRenderer implements AvatarRenderer
 {
-    // Variables declarations 
+    // Variables declarations
 
     private String _strKey;
     private String _strName;
@@ -50,7 +50,7 @@ public class BaseAvatarRenderer implements AvatarRenderer
      * {@inheritDoc }
      */
     @Override
-    public String getKey()
+    public String getKey( )
     {
         return _strKey;
     }
@@ -58,7 +58,8 @@ public class BaseAvatarRenderer implements AvatarRenderer
     /**
      * Sets the Key
      *
-     * @param strKey The Key
+     * @param strKey
+     *            The Key
      */
     public void setKey( String strKey )
     {
@@ -69,7 +70,7 @@ public class BaseAvatarRenderer implements AvatarRenderer
      * {@inheritDoc }
      */
     @Override
-    public String getName()
+    public String getName( )
     {
         return _strName;
     }
@@ -77,7 +78,8 @@ public class BaseAvatarRenderer implements AvatarRenderer
     /**
      * Sets the Name
      *
-     * @param strName The Name
+     * @param strName
+     *            The Name
      */
     public void setName( String strName )
     {
@@ -87,7 +89,8 @@ public class BaseAvatarRenderer implements AvatarRenderer
     /**
      * Sets the AvatarUrl
      *
-     * @param strAvatarUrl The AvatarUrl
+     * @param strAvatarUrl
+     *            The AvatarUrl
      */
     public void setAvatarUrl( String strAvatarUrl )
     {

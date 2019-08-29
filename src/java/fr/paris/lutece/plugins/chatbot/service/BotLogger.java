@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.chatbot.service;
 
 import fr.paris.lutece.plugins.chatbot.business.BotPost;
@@ -54,19 +53,17 @@ public class BotLogger implements BotListener
      * {@inheritDoc }
      */
     @Override
-    public void processBotResponse( HttpServletRequest request, String strBotKey, String strConversationId, String strMessage, Locale locale, List<BotPost> listMessages )
+    public void processBotResponse( HttpServletRequest request, String strBotKey, String strConversationId, String strMessage, Locale locale,
+            List<BotPost> listMessages )
     {
-            StringBuilder sbChatLogs = new StringBuilder();
-            sbChatLogs.append( "\"").append( strBotKey )
-                    .append( "\", \"").append( strConversationId )
-                    .append( "\", \"").append( strMessage )
-                    .append( "\"");
-            for ( BotPost post : listMessages )
-            {
-                sbChatLogs.append( ", \"").append( post.getContentType() ).append( "\"");
-                sbChatLogs.append( ", \"").append( post.getContent().replace( '\n', ' ' ) ).append( "\"");
-            }
-            LOGGER.info( sbChatLogs.toString() );
+        StringBuilder sbChatLogs = new StringBuilder( );
+        sbChatLogs.append( "\"" ).append( strBotKey ).append( "\", \"" ).append( strConversationId ).append( "\", \"" ).append( strMessage ).append( "\"" );
+        for ( BotPost post : listMessages )
+        {
+            sbChatLogs.append( ", \"" ).append( post.getContentType( ) ).append( "\"" );
+            sbChatLogs.append( ", \"" ).append( post.getContent( ).replace( '\n', ' ' ) ).append( "\"" );
+        }
+        LOGGER.info( sbChatLogs.toString( ) );
     }
 
 }

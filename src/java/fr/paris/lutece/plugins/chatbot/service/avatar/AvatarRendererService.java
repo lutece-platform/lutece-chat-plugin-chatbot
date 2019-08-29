@@ -50,12 +50,13 @@ public class AvatarRendererService
     /**
      * Returns the avatar renderer for a given key
      *
-     * @param strKey Tha avatar renderer key
+     * @param strKey
+     *            Tha avatar renderer key
      * @return The renderer
      */
     public static AvatarRenderer getAvatarRenderer( String strKey )
     {
-        return getAvatarRenderersMap().get( strKey );
+        return getAvatarRenderersMap( ).get( strKey );
     }
 
     /**
@@ -63,29 +64,30 @@ public class AvatarRendererService
      *
      * @return The list of renderers
      */
-    public static ReferenceList getAvatarRenderersList()
+    public static ReferenceList getAvatarRenderersList( )
     {
-        ReferenceList list = new ReferenceList();
-        for( AvatarRenderer renderer : getAvatarRenderersMap().values() )
+        ReferenceList list = new ReferenceList( );
+        for ( AvatarRenderer renderer : getAvatarRenderersMap( ).values( ) )
         {
-            list.addItem( renderer.getKey(), renderer.getName() );
+            list.addItem( renderer.getKey( ), renderer.getName( ) );
         }
         return list;
     }
 
     /**
      * Get the Renderers registry map
+     * 
      * @return The map
      */
-    private static Map<String, AvatarRenderer> getAvatarRenderersMap()
+    private static Map<String, AvatarRenderer> getAvatarRenderersMap( )
     {
-        if( _mapAvatarRenderer == null )
+        if ( _mapAvatarRenderer == null )
         {
-            _mapAvatarRenderer = new HashMap<>();
+            _mapAvatarRenderer = new HashMap<>( );
             List<AvatarRenderer> listRenderers = SpringContextService.getBeansOfType( AvatarRenderer.class );
-            for( AvatarRenderer renderer : listRenderers )
+            for ( AvatarRenderer renderer : listRenderers )
             {
-                _mapAvatarRenderer.put( renderer.getKey(), renderer );
+                _mapAvatarRenderer.put( renderer.getKey( ), renderer );
             }
         }
         return _mapAvatarRenderer;

@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.chatbot.service.avatar;
 
 import fr.paris.lutece.plugins.chatbot.business.Post;
@@ -40,23 +39,27 @@ import fr.paris.lutece.plugins.chatbot.business.Post;
 /**
  * Avatar Renderer
  */
-public interface AvatarRenderer 
+public interface AvatarRenderer
 {
     /**
      * The renderer key
-     * @return The key 
+     * 
+     * @return The key
      */
-    String getKey();
-    
+    String getKey( );
+
     /**
      * The renderer name
+     * 
      * @return The name
      */
-    String getName();
-    
+    String getName( );
+
     /**
-     * Let modify the avatar URL of the post 
-     * @param post The post
+     * Let modify the avatar URL of the post
+     * 
+     * @param post
+     *            The post
      */
     void renderAvatar( Post post );
 }
